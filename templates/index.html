@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buttons Page</title>
+  </head>
+  <body>
+    <h1>Welcome to marklundager.com</h1>
+    <p>Click the buttons below:</p>
+    <button onclick="buttonClicked('off')">Turn Off</button>
+    <button onclick="buttonClicked('on')">Turn On</button>
+
+    <script>
+      function buttonClicked(action) {
+        // Send a request to the Flask API endpoint with the button action
+        fetch(`/run_python_code/${action}`)
+          .then((response) => response.json())
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

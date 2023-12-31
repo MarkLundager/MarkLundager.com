@@ -1,50 +1,40 @@
 from flask import Flask
-from flask import request
+from flask import request, render_template
 import serial
 import os
+import platform
+import serial.tools.list_ports
 
 app = Flask(__name__)
 
-def find_first_ttyacm():
-    dev_path = '/dev/'
-    acm_devices = [device for device in os.listdir(dev_path) if device.startswith('ttyACM')]
-    
-    if acm_devices:
-        acm_devices.sort()  # Sort to ensure the first device is the lowest ACM number
-        first_acm_device = acm_devices[0]
-        return os.path.join(dev_path, first_acm_device)
+def setup_communication_with_arduino():
+    if platform.system() == 'Linux':
+        dev_path = '/dev/'
+        acm_devices = [device for device in os.listdir(dev_path) if device.startswith('ttyACM')]
+        
+        if acm_devices:
+            acm_devices.sort()  # Sort to ensure the first device is the lowest ACM number
+            first_acm_device = acm_devices[0]
+            return os.path.join(dev_path, first_acm_device)
+        else:
+            return None
     else:
-        return None
+        arduino_ports = [
+            p.device
+            for p in serial.tools.list_ports.comports()
+            if 'Arduino' in p.description
+        ]
 
-ser = serial.Serial(find_first_ttyacm(), 9600, timeout=1)
+        if arduino_ports:
+            return arduino_ports[0]
+        else:
+            return None
+
+ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
 @app.route('/')
 def index():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Buttons Page</title>
-    </head>
-    <body>
-        <h1>Welcome to marklundager.com</h1>
-        <p>Click the buttons below:</p>
-        <button onclick="buttonClicked('off')">Turn Off</button>
-        <button onclick="buttonClicked('on')">Turn On</button>
-
-        <script>
-            function buttonClicked(action) {
-                // Send a request to the Flask API endpoint with the button action
-                fetch(`/run_python_code/${action}`)
-                    .then(response => response.json())
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
-        </script>
-    </body>
-    </html>
-    """
+    return render_template('index.html')
 
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
