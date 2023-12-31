@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import request, render_template
+from flask import Flask, request, render_template
 import serial
 import os
 import platform
@@ -74,4 +73,5 @@ def execute_turn_on_code():
     return "Turn On clicked! Run Python code to turn on."
 
 if __name__ == '__main__':
+    print(platform.__version__)
     app.run(host='0.0.0.0', port=8000)
