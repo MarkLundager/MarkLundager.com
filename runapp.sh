@@ -7,5 +7,5 @@ cd ~/MarkLundager.com
 source ~/pythonvenv/bin/activate
 
 # Run the Python script
-python3 app.py
+python3 src/app.py
 
