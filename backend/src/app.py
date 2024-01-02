@@ -30,14 +30,18 @@ def setup_communication_with_arduino():
             return None
 
 
+ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
+
     if ser is not None:
+        ser.reset_input_buffer()
         if action == 'off':
             # Code for turning off
             result = execute_turn_off_code()
@@ -50,8 +54,6 @@ def run_python_code(action):
     return {'message': result}
 
 def execute_turn_off_code():
-    ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
-    ser.reset_input_buffer()
 
     while True:
         ser.write("0\n".encode('utf-8'))
@@ -63,9 +65,7 @@ def execute_turn_off_code():
     return "Turn Off clicked! "
 
 def execute_turn_on_code():
-    ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
-    ser.reset_input_buffer()
-    
+
     while True:
         ser.write("1\n".encode('utf-8'))
         line = ser.readline().decode('utf-8').rstrip()
