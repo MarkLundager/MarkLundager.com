@@ -29,7 +29,7 @@ def setup_communication_with_arduino():
         else:
             return None
 
-ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
+
 
 @app.route('/')
 def index():
@@ -50,6 +50,7 @@ def run_python_code(action):
     return {'message': result}
 
 def execute_turn_off_code():
+    ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
     ser.reset_input_buffer()
 
     while True:
@@ -62,8 +63,9 @@ def execute_turn_off_code():
     return "Turn Off clicked! "
 
 def execute_turn_on_code():
+    ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
     ser.reset_input_buffer()
-
+    
     while True:
         ser.write("1\n".encode('utf-8'))
         line = ser.readline().decode('utf-8').rstrip()
