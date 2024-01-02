@@ -37,12 +37,13 @@ def index():
 
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
-    if action == 'off':
-        # Code for turning off
-        result = execute_turn_off_code()
-    elif action == 'on':
-        # Code for turning on
-        result = execute_turn_on_code()
+    if ser is None:
+        if action == 'off':
+            # Code for turning off
+            result = execute_turn_off_code()
+        elif action == 'on':
+            # Code for turning on
+            result = execute_turn_on_code()
     else:
         result = "Invalid action."
 
@@ -58,7 +59,7 @@ def execute_turn_off_code():
         if line == "off":
             break
 
-    return "Turn Off clicked! Run Python code to turn off."
+    return "Turn Off clicked! "
 
 def execute_turn_on_code():
     ser.reset_input_buffer()
@@ -70,8 +71,7 @@ def execute_turn_on_code():
         if line == "on":
             break
 
-    return "Turn On clicked! Run Python code to turn on."
+    return "Turn On clicked!"
 
 if __name__ == '__main__':
-    print(platform.__version__)
     app.run(host='0.0.0.0', port=8000)
