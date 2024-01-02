@@ -1,38 +1,53 @@
-.App {
+body {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.banner{
+  background-color:#151515;
   text-align: center;
-}
+  padding: 0px;
+  margin: 0px;
+  font-size: 100px;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.banner .signIn {
+  position: absolute;
+  top: 10px; 
+  left: 10px; 
+  padding: 10px;
+  cursor: pointer;
+  font-size: 15px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.banner .firstName{
+  color: #16511c;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+}
+.banner .lastName{
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+  color: #16511c;
+}
+.banner ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content:left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.banner li {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+  color: #16511c;
+  font-size: 35px;
+  margin: 0px 30px;
+  padding: 0px;
 }
+
+  
