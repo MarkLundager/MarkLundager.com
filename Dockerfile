@@ -1,24 +1,31 @@
-# Use an ARM64-based Python image
 FROM arm64v8/python:3.11
+WORKDIR /app
 
-# Set the working directory to /app
-WORKDIR /src
+# Copy the backend code to the container
+COPY backend/ .
 
-# Copy only the requirements file to leverage Docker cache
-COPY src/requirements.txt .
-COPY package*.json ./src/
-
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Change to the frontend directory
+WORKDIR /app/frontend
+
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Install frontend dependencies
 RUN npm install
 
-# Copy the rest of the application code to the container
-COPY . .
+# Build the frontend
+RUN npm run build
 
 # Expose the port your app runs on
 EXPOSE 8000
 
+# Change back to the /app directory
+WORKDIR /app
+
 # Specify the command to run on container start
-CMD ["npm", "start"]
+CMD ["python", "backend/src/app.py"]
 
 
