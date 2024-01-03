@@ -1,10 +1,12 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, jsonify
 import serial
 import os
 import platform
 import serial.tools.list_ports
 
+
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
+
 
 def setup_communication_with_arduino():
     if platform.system() == 'Linux':
@@ -30,17 +32,20 @@ def setup_communication_with_arduino():
             return None
 
 
-ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
+#Global variables
+ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attempt to connect to arduino
 
+
+#Point to index.html in React project.
 @app.route('/')
 def index():
-    return render_template('index.html')#, static_url_path=url_for('static', filename=''))
+    return render_template('index.html')
 
-
+#Handles GET python requests.
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
-
-    if ser is not None:
+    try_attaching_to_arduino()
+    if ser.is_open:
         ser.reset_input_buffer()
         if action == 'off':
             # Code for turning off
@@ -50,9 +55,10 @@ def run_python_code(action):
             result = execute_turn_on_code()
     else:
         result = "Invalid action."
+    data = {'message': result}
+    return jsonify(data)
 
-    return {'message': result}
-
+#Send 'off' command to Arduino
 def execute_turn_off_code():
 
     while True:
@@ -64,6 +70,7 @@ def execute_turn_off_code():
 
     return "Turn Off clicked! "
 
+#Send 'on' command to Arduino
 def execute_turn_on_code():
 
     while True:
@@ -74,6 +81,12 @@ def execute_turn_on_code():
             break
 
     return "Turn On clicked!"
+
+#In case of arudino being disconnected, try to restablish connection. Used in run python code.
+def try_attaching_to_arduino():
+    global ser
+    if ser is None:
+        ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
