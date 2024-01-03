@@ -34,7 +34,7 @@ ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
 @app.route('/')
 def index():
-    return render_template('index.html', static_url_path=url_for('static', filename=''))
+    return render_template('index.html')#, static_url_path=url_for('static', filename=''))
 
 
 @app.route('/run_python_code/<action>')
