@@ -1,4 +1,4 @@
 Flask==3.0.0
-pyserial==2.5
+pyserial==3.5
 sqlite3==3.40
 bcrypt==4.1
