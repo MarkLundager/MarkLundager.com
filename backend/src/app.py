@@ -3,6 +3,7 @@ import serial
 import os
 import platform
 import serial.tools.list_ports
+import sqlite3
 
 
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
@@ -89,4 +90,5 @@ def try_attaching_to_arduino():
         ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
 if __name__ == '__main__':
+    print(sqlite3.sqlite_version)
     app.run(host='0.0.0.0', port=8000)
