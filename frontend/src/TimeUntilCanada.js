@@ -8,6 +8,7 @@ const TimeUnilCanada = () => {
     hours: null,
     minutes: null,
     seconds: null,
+    totalSeconds: null
   });
 
     const fetchTimeRemaining = async () => {
@@ -22,18 +23,20 @@ const TimeUnilCanada = () => {
 
     const updateLocalTime = () => {
       setTimeLeft((prevTime) => {
-        const { days, hours, minutes, seconds } = prevTime;
-    
-        const newSeconds = seconds > 0 ? seconds - 1 : 59;
-        const newMinutes = newSeconds === 59 ? minutes - 1 : minutes;
-        const newHours = newMinutes === 59 ? hours - 1 : hours;
-        const newDays = newHours === 59 ? days - 1 : days;
-    
+        const {totalSeconds } = prevTime;
+        const newTotalSeconds = Math.floor(totalSeconds -1);
+        const newSeconds = Math.floor(newTotalSeconds%60);
+
+        const newMinutes = Math.floor((newTotalSeconds/60)%60);
+        const newHours = Math.floor((newTotalSeconds/60/60)%24);
+        const newDays = Math.floor(newTotalSeconds/60/60/24);
+
         return {
           days: newDays >= 0 ? newDays : 0,
           hours: newHours >= 0 ? newHours : 0,
           minutes: newMinutes >= 0 ? newMinutes : 0,
           seconds: newSeconds >= 0 ? newSeconds : 0,
+          totalSeconds: newTotalSeconds
         };
       });
     };

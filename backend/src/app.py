@@ -115,6 +115,7 @@ def calculate_time_remaining():
 
     # Calculate the time difference
     time_difference = target_date - current_datetime
+    total_seconds_remaining = int(time_difference.total_seconds())
 
     # Extract days, hours, minutes, and seconds
     days_remaining = time_difference.days
@@ -126,7 +127,8 @@ def calculate_time_remaining():
     return jsonify({'days': days_remaining,
                     'hours': hours_remaining,
                     'minutes': minutes_remaining,
-                    'seconds': seconds_remaining
+                    'seconds': seconds_remaining,
+                    'totalSeconds': total_seconds_remaining
                     })
 
 if __name__ == '__main__':
