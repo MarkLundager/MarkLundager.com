@@ -10,7 +10,7 @@
 
 # production
 /frontend/build
-
+venv/
 # misc
 /backend/src/__pycache__/
 

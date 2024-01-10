@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from './Banner';
 import Buttons from './Buttons';
-import MoneyNumber from './MoneyNumber';
+import TimeUntilCanada from './TimeUntilCanada';
 
 const App = () => {
   const handleButtonClick = (action) => {
@@ -16,7 +16,7 @@ const App = () => {
     <div>
       <Banner onButtonClick={handleButtonClick} />
       <Buttons onButtonClick={handleButtonClick} />
-      <MoneyNumber></MoneyNumber>
+      <TimeUntilCanada></TimeUntilCanada>
     </div>
   );
 };
