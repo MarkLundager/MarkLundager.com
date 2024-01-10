@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import './MoneyNumber.css';
 
 const MoneyNumber = () => {
 
@@ -21,13 +22,13 @@ const MoneyNumber = () => {
           ) - now;
 
 
-        const intervalId = setInterval(updateNumber, timeUntilNext1AM);
+        const intervalId = setInterval(updateNumber, 1000);
         return () => clearInterval(intervalId);
     },[])
 
   return (
-      <div id="MoneyNumber">
-        <p> Money Number: {moneyNumber}</p>
+      <div id="MoneyNumber" class="MoneyNumber">
+        <p> Number: {moneyNumber}</p>
       </div>
 
   );
