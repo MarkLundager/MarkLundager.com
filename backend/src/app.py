@@ -39,7 +39,6 @@ def setup_communication_with_arduino():
         else:
             return None
 
-
 #Global variables
 ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attempt to connect to arduino
 
@@ -66,11 +65,6 @@ def your_endpoint():
 #Handles GET python requests.
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
-    global lamp_on
-    if action == "off":
-        lamp_on = False
-    else:
-        lamp_on = True
     try_attaching_to_arduino()
     if ser.is_open:
         ser.reset_input_buffer()
