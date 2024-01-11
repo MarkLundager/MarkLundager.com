@@ -14,8 +14,6 @@ app = Flask(__name__, static_folder='../../frontend/build/static', template_fold
 
 
 
-
-
 def setup_communication_with_arduino():
     if platform.system() == 'Linux':
         dev_path = '/dev/'

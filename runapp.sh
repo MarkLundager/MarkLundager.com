@@ -7,5 +7,6 @@ cd ~/MarkLundager.com
 source ~/pythonvenv/bin/activate
 
 # Run the Python script
-python3 backend/src/app.py
+gunicorn -b localhost:8000 backend.src.app:app
+#python3 backend/src/app.py
 
