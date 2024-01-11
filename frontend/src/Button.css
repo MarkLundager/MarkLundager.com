@@ -1,0 +1,15 @@
+.buttonIndicator{
+    background-color: red;
+    color: blue;
+    width: 130px;
+    height: 100px;
+  }
+
+  .green {
+    background-color: rgb(17, 133, 11);
+  }
+  
+  .red {
+    background-color: rgb(216, 5, 5);
+  }
+  

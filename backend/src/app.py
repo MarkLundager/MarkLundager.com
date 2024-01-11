@@ -8,6 +8,7 @@ import time
 from datetime import datetime, timedelta
 
 ##Setup
+
 money_number = 67
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
 
@@ -57,10 +58,19 @@ def timeUntilCanada():
     return calculate_time_remaining()
 
 
+lamp_on = False
+@app.route('/lamp_status')
+def your_endpoint():
+    return jsonify({"lightOn": lamp_on})
 
 #Handles GET python requests.
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
+    global lamp_on
+    if action == "off":
+        lamp_on = False
+    else:
+        lamp_on = True
     try_attaching_to_arduino()
     if ser.is_open:
         ser.reset_input_buffer()
@@ -77,24 +87,26 @@ def run_python_code(action):
 
 #Send 'off' command to Arduino
 def execute_turn_off_code():
-
+    global lamp_on
     while True:
         ser.write("0\n".encode('utf-8'))
         line = ser.readline().decode('utf-8').rstrip()
         print(line)
         if line == "off":
+            lamp_on = False
             break
 
     return "Turn Off clicked! "
 
 #Send 'on' command to Arduino
 def execute_turn_on_code():
-
+    global lamp_on
     while True:
         ser.write("1\n".encode('utf-8'))
         line = ser.readline().decode('utf-8').rstrip()
         print(line)
         if line == "on":
+            lamp_on = True
             break
 
     return "Turn On clicked!"
