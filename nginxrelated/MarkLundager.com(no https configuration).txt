@@ -1,0 +1,22 @@
+server {
+
+    # Port 80 is used for incoming http requests
+    listen 80;
+
+    # The URL we want this server config to apply to
+    server_name marklundager.com www.marklundager.com;
+
+    # The document root of our site - i.e. where its files are located
+    #root /var/www/marklundager.com;
+
+    # Which files to look for by default when accessing directories of our site
+    #index index.html index.htm index.php;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://localhost:8000/;
+    }
+}
