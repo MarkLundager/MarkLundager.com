@@ -8,8 +8,7 @@ import time
 from datetime import datetime, timedelta
 
 ##Setup
-
-money_number = 67
+lamp_on = False
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
 
 
@@ -46,16 +45,13 @@ ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attem
 def index():
     return render_template('index.html')
 
-@app.route('/moneyNumber', methods=['GET'])
-def moneyNumber():
-    return jsonify({'moneyNumber': money_number})
 
 @app.route('/timeUntilCanada', methods=['GET'])
 def timeUntilCanada():
     return calculate_time_remaining()
 
 
-lamp_on = False
+
 @app.route('/lamp_status')
 def your_endpoint():
     return jsonify({"lightOn": lamp_on})
@@ -136,5 +132,4 @@ def calculate_time_remaining():
                     })
 
 if __name__ == '__main__':
-    print(sqlite3.sqlite_version)
     app.run(host='0.0.0.0', port=8000)
