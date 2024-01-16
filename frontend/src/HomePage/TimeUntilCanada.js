@@ -19,7 +19,7 @@ const TimeUnilCanada = () => {
         const response = await fetch('/timeUntilCanada', { method: 'GET' });
         const data = await response.json();
         setTimeLeft(data);
-        dataLoaded = true;
+        setDataLoaded(true);
       } catch (error) {
         console.error('Error fetching time remaining', error);
       }
