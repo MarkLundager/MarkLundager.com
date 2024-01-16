@@ -1,3 +1,8 @@
+:root {
+  --green: #16511c;
+  --white: #ffffff;
+}
+
 body {
   text-align: left;
   margin: 0;
@@ -5,7 +10,7 @@ body {
   
 }
 
-.banner{
+.header{
   background-color:#151515;
   text-align: center;
   padding: 0px;
@@ -13,27 +18,30 @@ body {
   font-size: 100px;
 
 }
-.banner .signIn {
+.createAccount {
   position: absolute;
   top: 10px; 
   left: 10px; 
   padding: 10px;
   cursor: pointer;
   font-size: 15px;
-  color: white;
+  color: rgb(225, 203, 203);
+  text-decoration: none;
 }
 
-.banner .firstName{
-  color: #16511c;
+.header .firstName{
+  cursor: pointer;
+  color: var(--green);
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: rgb(255, 255, 255);
 }
-.banner .lastName{
+.header .lastName{
+  cursor: pointer;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: rgb(255, 255, 255);
-  color: #16511c;
+  color: var(--green);
 }
-.banner ul {
+.header ul {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
@@ -41,13 +49,24 @@ body {
   justify-content:left;
 }
 
-.banner li {
+.header li {
+  text-decoration:none;
+  cursor: pointer;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(255, 255, 255);
-  color: #16511c;
+  color: var(--green);
   font-size: 35px;
   margin: 0px 30px;
   padding: 0px;
 }
+
+a:-webkit-any-link {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+  text-decoration: none;
+  color: var(--green);
+  cursor: pointer;
+}
+
 
   

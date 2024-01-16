@@ -7,5 +7,6 @@ CREATE TABLE accounts (
     email TEXT UNIQUE,
     username TEXT UNIQUE,
     password_hash TEXT,
+    authority INTEGER,
     PRIMARY KEY (id)
 );

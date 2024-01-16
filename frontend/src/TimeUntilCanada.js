@@ -49,9 +49,9 @@ const TimeUnilCanada = () => {
     return (
       <div id="TimeUntilCanada" className="TimeUntilCanada">
         {timeLeft.days !== null ? (
-        <section class="wrapper">
-          <div class="top">Time Until Canada</div>
-          <div class="timeRemaning">Days: {timeLeft.days} Hours: {timeLeft.hours} Minutes: {timeLeft.minutes} Seconds: {timeLeft.seconds}</div>
+        <section className="wrapper">
+          <div className="top">Time Until Canada</div>
+          <div className="timeRemaning">Days: {timeLeft.days} Hours: {timeLeft.hours} Minutes: {timeLeft.minutes} Seconds: {timeLeft.seconds}</div>
         </section>
         ) : (
           <p>Loading...</p>

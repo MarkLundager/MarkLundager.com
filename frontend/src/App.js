@@ -1,24 +1,22 @@
 import React from 'react';
-import Banner from './Banner';
-import Buttons from './Buttons';
-import TimeUntilCanada from './TimeUntilCanada';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './HomePage';
+import ControllerPage from './ControllerPage';
+import SignUpPage from './SignUpPage';
+
+
+
 
 const App = () => {
-  const handleButtonClick = (action) => {
-    fetch(`/run_python_code/${action}`)
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
-  return (
-    <div>
-      <Banner onButtonClick={handleButtonClick} />
-      <Buttons onButtonClick={handleButtonClick} />
-      <TimeUntilCanada></TimeUntilCanada>
-    </div>
-  );
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage/>} exact />
+          <Route path="/controller" element={<ControllerPage/>} exact />
+          <Route path="/sign_up" element={<SignUpPage/>} exact />
+        </Routes>
+      </Router>
+    );
 };
 
 export default App;

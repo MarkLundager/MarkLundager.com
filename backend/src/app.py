@@ -4,14 +4,13 @@ import os
 import platform
 import serial.tools.list_ports
 import sqlite3
-import time
-from datetime import datetime, timedelta
+from datetime import datetime
+from user_routes import user_routes
 
-##Setup
+#Global variables
 lamp_on = False
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
-
-
+app.register_blueprint(user_routes)
 
 def setup_communication_with_arduino():
     if platform.system() == 'Linux':
@@ -36,8 +35,8 @@ def setup_communication_with_arduino():
         else:
             return None
 
-#Global variables
 ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attempt to connect to arduino
+
 
 
 #Point to index.html in React project.
@@ -45,7 +44,7 @@ ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attem
 def index():
     return render_template('index.html')
 
-
+    
 @app.route('/timeUntilCanada', methods=['GET'])
 def timeUntilCanada():
     return calculate_time_remaining()
@@ -83,7 +82,6 @@ def execute_turn_off_code():
         if line == "off":
             lamp_on = False
             break
-
     return "Turn Off clicked! "
 
 #Send 'on' command to Arduino
@@ -96,7 +94,6 @@ def execute_turn_on_code():
         if line == "on":
             lamp_on = True
             break
-
     return "Turn On clicked!"
 
 #In case of arudino being disconnected, try to restablish connection. Used in run python code.
