@@ -11,7 +11,7 @@ class User(UserMixin):
         self.username = username
         self.authority = authority
 
-def sign_up(db, username, email, password):
+def create_account(db, username, email, password):
     with db.cursor() as c:
         c.execute("""
                 SELECT username, email
@@ -53,7 +53,7 @@ def sign_up(db, username, email, password):
             response.status_code = 201
             return response
 
-def sign_in(db, username_or_email, password):
+def login(db, username_or_email, password):
     with db.cursor() as c:
         c.execute("""
                 SELECT id, username, email, password, authority

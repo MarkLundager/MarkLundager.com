@@ -21,7 +21,7 @@ const Buttons = ({ onButtonClick }) => {
       .then(response => response.json())
       .then(data => {
         setDivColor(data.lightOn === false ? 'red' : 'green');
-        setDataLoaded(true);  // Mark that the data has been loaded
+        setDataLoaded(true); 
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
