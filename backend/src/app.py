@@ -1,17 +1,20 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, session
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import serial
 import os
 import platform
 import serial.tools.list_ports
-import sqlite3
 from datetime import datetime
 from user_routes import user_routes
+from auth import setup_user_manager,get_user
 
 #Global variables
 lamp_on = False
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
+app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b9c61f84d6fe3'
+login_manager = LoginManager()
+setup_user_manager(app, login_manager)
 app.register_blueprint(user_routes)
-
 def setup_communication_with_arduino():
     if platform.system() == 'Linux':
         dev_path = '/dev/'
@@ -34,28 +37,28 @@ def setup_communication_with_arduino():
             return arduino_ports[0]
         else:
             return None
-
 ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1) # attempt to connect to arduino
 
 
-
-#Point to index.html in React project.
 @app.route('/')
 def index():
     return render_template('index.html')
-
     
+@login_manager.user_loader
+def load_user(user_id):
+    user = get_user(user_id)
+    return user
+
+
 @app.route('/timeUntilCanada', methods=['GET'])
 def timeUntilCanada():
     return calculate_time_remaining()
-
-
 
 @app.route('/lamp_status')
 def your_endpoint():
     return jsonify({"lightOn": lamp_on})
 
-#Handles GET python requests.
+
 @app.route('/run_python_code/<action>')
 def run_python_code(action):
     try_attaching_to_arduino()
@@ -72,7 +75,7 @@ def run_python_code(action):
     data = {'message': result}
     return jsonify(data)
 
-#Send 'off' command to Arduino
+
 def execute_turn_off_code():
     global lamp_on
     while True:
@@ -84,7 +87,7 @@ def execute_turn_off_code():
             break
     return "Turn Off clicked! "
 
-#Send 'on' command to Arduino
+
 def execute_turn_on_code():
     global lamp_on
     while True:
@@ -96,13 +99,13 @@ def execute_turn_on_code():
             break
     return "Turn On clicked!"
 
-#In case of arudino being disconnected, try to restablish connection. Used in run python code.
+
 def try_attaching_to_arduino():
     global ser
     if ser is None:
         ser = serial.Serial(setup_communication_with_arduino(), 9600, timeout=1)
 
-#TimeRemaining until canada
+
 def calculate_time_remaining():
     # Get the current date and time
     current_datetime = datetime.now()
@@ -127,6 +130,12 @@ def calculate_time_remaining():
                     'seconds': seconds_remaining,
                     'totalSeconds': total_seconds_remaining
                     })
+
+
+
+    # Implement a function to load the user from your database
+    # Example: return User(user_id, username, authority)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)

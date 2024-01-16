@@ -1,16 +1,15 @@
 // Login.js
 import React, { useState } from 'react';
-import Layout from'./Layout';
+import Layout from'../LayoutTemplate/Layout';
 
 
-const Login = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Implement authentication logic, e.g., make API request to the server
     try {
       const response = await fetch('sign_in', {
         method: 'POST',
@@ -38,4 +37,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

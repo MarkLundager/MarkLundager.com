@@ -1,6 +1,6 @@
 import React from "react";
 import Buttons from "./Buttons";
-import Layout from "./Layout";
+import Layout from "../LayoutTemplate/Layout";
 
 const Controller = () => {
     return(

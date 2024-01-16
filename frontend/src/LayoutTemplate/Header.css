@@ -1,0 +1,73 @@
+.header{
+    background-color: var(--gray);
+    text-align: center;
+    font-size: 80px;
+  }
+  .accountManagement {
+    position: absolute;
+  
+    color: rgb(225, 203, 203);
+    text-decoration: none;
+  }
+  
+  .accountManagement ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: var(--gray);
+  }
+  
+  .accountManagement li {
+    float: left;
+    display: inline;
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+  
+  .accountManagement li a {
+    display: block;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .accountManagement li a:hover {
+    background-color: var(--black);
+  }
+  
+  .header .firstName{
+    cursor: pointer;
+    color: var(--green);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+  }
+  .header .lastName{
+    cursor: pointer;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+    color: var(--green);
+  }
+  .header ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content:left;
+  }
+  
+  .header .menu li {
+    text-decoration:none;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 35px;
+    margin: 0px 30px;
+    padding: 0px;
+  }
+  
+  .header a:-webkit-any-link {
+    padding:0;
+    margin: 0;
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+  }

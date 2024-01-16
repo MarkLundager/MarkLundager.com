@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import './TimeUntilCanada.css'
+import './HomePage.css'
+import Spinner from '../GeneralComponents/Spinner'
 
 const TimeUnilCanada = () => {
 
@@ -11,11 +12,14 @@ const TimeUnilCanada = () => {
     totalSeconds: null
   });
 
+  const [dataLoaded, setDataLoaded] = useState(false);
+
     const fetchTimeRemaining = async () => {
       try {
         const response = await fetch('/timeUntilCanada', { method: 'GET' });
         const data = await response.json();
         setTimeLeft(data);
+        dataLoaded = true;
       } catch (error) {
         console.error('Error fetching time remaining', error);
       }
@@ -45,18 +49,15 @@ const TimeUnilCanada = () => {
         const intervalId = setInterval(updateLocalTime, 1000);
         return () => clearInterval(intervalId);
     },[])
-
+    if (!dataLoaded) {
+      return(<Spinner>Fetching time remaining to Canada</Spinner>);  
+    };
     return (
       <div id="TimeUntilCanada" className="TimeUntilCanada">
-        {timeLeft.days !== null ? (
         <section className="wrapper">
           <div className="top">Time Until Canada</div>
           <div className="timeRemaning">Days: {timeLeft.days} Hours: {timeLeft.hours} Minutes: {timeLeft.minutes} Seconds: {timeLeft.seconds}</div>
         </section>
-        ) : (
-          <p>Loading...</p>
-        )}
-
       </div>
     );
   };

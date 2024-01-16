@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Header.css';
 const Header = () => {
 
   return (
     <section className="header" id="header"  component={Link} to={'/'}>
-       <div className="createAccount">
-        <Link to="/sign_up">Create account</Link>
-        </div>
+      <div className="accountManagement">
+        <ul>
+          <li><Link to="/create_account">Create account</Link></li>
+          <li><Link to="/login_page">Log in</Link></li>
+        </ul>
+      </div>
       <span id="firstName" className="firstName">
         <Link
         to="/">Mark</Link>
