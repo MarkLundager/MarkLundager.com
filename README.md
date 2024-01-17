@@ -12,3 +12,5 @@ Mark's webpage
 - Create About Me section
 - Change Backend to handle incorrect requests better
 - check status code of every response and make sure it is in align with the conventions
+- Handle communication between client and server better in order to inform users better
+- 
