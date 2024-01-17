@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS accounts;
 
+DROP TABLE IF EXISTS lampauthority;
+
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE accounts (
@@ -7,12 +9,19 @@ CREATE TABLE accounts (
     email TEXT UNIQUE,
     username TEXT UNIQUE,
     password_hash TEXT,
-    authority INTEGER
+    authority INTEGER,
+    FOREIGN KEY (authority) REFERENCES lampauthority(authority)
 );
 
-CREATE TABLE lamps (
-    lamp_id INTEGER PRIMARY KEY,
-    authority INTEGER,
-    lamp TEXT,
-    FOREIGN KEY (authority) REFERENCES accounts(authority)
+CREATE TABLE lampauthority (
+    authority INTEGER PRIMARY KEY,
+    lamp TEXT
 );
+
+INSERT INTO
+    lampauthority(authority, lamp)
+VALUES
+    (4, 'GREEN,BLUE,YELLOW,RED'),
+    (3, 'BLUE'),
+    (2, 'YELLOW'),
+    (1, 'RED');

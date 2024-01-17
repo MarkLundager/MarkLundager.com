@@ -44,9 +44,8 @@ const CreateAccountPage = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Response:', data);
-      } else {
-        const errorData = await response.json();
-        console.error('Error:', errorData);
+      } else{
+        console.error('Error:', response.errorMessage);
       }
     } catch (error) {
       console.error('Error:', error);

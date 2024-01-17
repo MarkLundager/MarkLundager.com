@@ -26,9 +26,9 @@ const Buttons = ({ onButtonClick }) => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  //  if (!dataLoaded) {
-  //    return null; // or a loading spinner, message, etc.
-  //  }
+    if (!dataLoaded) {
+      return null; // or a loading spinner, message, etc.
+    }
 
   return (
     <div>

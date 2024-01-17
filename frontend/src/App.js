@@ -4,6 +4,7 @@ import HomePage from './HomePage/HomePage';
 import ControllerPage from './ControllerPage/ControllerPage';
 import CreateAccountPage from './CreateAccountPage/CreateAccountPage';
 import LoginPage from './LoginPage/LoginPage';
+import LogoutPage from './LogoutPage/LogoutPage';
 
 
 
@@ -12,9 +13,10 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>} exact />
-          <Route path="/controller" element={<ControllerPage/>} exact />
-          <Route path="/create_account" element={<CreateAccountPage/>} exact />
+          <Route path="/controller_page" element={<ControllerPage/>} exact />
+          <Route path="/create_account_page" element={<CreateAccountPage/>} exact />
           <Route path="/login_page" element={<LoginPage/>} exact />
+          <Route path="/logout_page" element={<LogoutPage/>} exact />
         </Routes>
       </Router>
     );
