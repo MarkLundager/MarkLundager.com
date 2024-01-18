@@ -14,8 +14,8 @@ const Lamp = ({color}) => {
 
 
   return (
-  <div class="container" style={{'--color': color}}>
-  <a class="button" onClick={handleButtonClick()}>
+  <div class="container" style={{'--color':color}}>
+  <a class="button" onClick={handleButtonClick}>
     <span></span>
     <span></span>
     <span></span>

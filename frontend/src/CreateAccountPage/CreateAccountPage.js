@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../LayoutTemplate/Layout';
 import './CreateAccountPage.css';
+import { useNavigate } from "react-router-dom";
 
 const CreateAccountPage = () => {
+  const navigate = useNavigate();
+  const [information, setInformation] = useState('')
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     repeatPassword: '',
-    passwordError: '',
   });
-
+  
   useEffect(() => {
-    setFormData((prevdata) => {
-      return {
-        ...prevdata,
-        passwordError:prevdata.password === prevdata.repeatPassword ? '' : 'Passwords do not match'
-      };
-    });
+    setInformation(formData.password === formData.repeatPassword ? '' : 'Passwords do not match')
   }, [formData.repeatPassword,formData.password]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(formData.password !== formData.repeatPassword){
-      alert("Registration failed, passwords do not match");
+      setInformation('Passwords do not match.')
       return;
     };
 
@@ -40,12 +37,19 @@ const CreateAccountPage = () => {
           password: formData.password,
         }),
       });
-  
       if (response.ok) {
         const data = await response.json();
         console.log('Response:', data);
-      } else{
-        console.error('Error:', response.errorMessage);
+        navigate('/')
+      } else if(response.status === 404){
+        setInformation('Could not communicate with server');
+      }
+      else if(response.status === 400){
+        const data = await response.json();
+        setInformation(data.errorMessage);
+      }
+      else{
+        setInformation('Unknown Error')
       }
     } catch (error) {
       console.error('Error:', error);
@@ -61,7 +65,7 @@ const CreateAccountPage = () => {
           <input className="form-input" type="text" name="email" placeholder="Email" required onChange={ (e) => setFormData({...formData,email:e.target.value})}></input>
           <input className="form-input" type="password" name="password" placeholder="Password" required onChange={ (e) => setFormData({...formData,password:e.target.value})}></input>
           <input className="form-input" type="password" name="repeatPassword" placeholder="Repeat password" required onChange={(e) => setFormData({...formData,repeatPassword:e.target.value})}></input>
-          {formData.passwordError && <p>{formData.passwordError}</p>}
+          {information === '' ? (<p></p>) : (<p>{information}</p>)}
           <button className="create-account-button" type="submit">Register Account</button>
           </form>
         </div>

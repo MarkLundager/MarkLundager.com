@@ -7,19 +7,41 @@ import Spinner from "../GeneralComponents/Spinner.js";
 const Controller = () => {
     const [availableColors, setAvailableColors] = useState([]);
     const [colorsLoaded, setColorsLoaded] = useState(false);
-    //const [videoLoaded, setVideoLoaded] = useState(false);
+    const [videoLoaded, setVideoLoaded] = useState(false);
+    const videoFeedUrl = 'http://marklundager.com/video_feed';
+
+    const fetchdata = async () => {
+        try {
+            const response = await fetch('/get_lamp_info', {
+                method: 'GET',
+            });
+    
+            if (response.ok) {
+                const { colours } = await response.json();
+                if (colours) {
+                    setAvailableColors(colours.split(','));
+                    setColorsLoaded(true);
+                    setVideoLoaded(true);
+                } else {
+                    console.error('Data or data.colours is undefined');
+                    setColorsLoaded(true);
+                    setVideoLoaded(true);
+                }
+            } else {
+                alert('Could not communicate with server');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 
     useEffect(() => {
-        fetch('/get_lamp_info')
-            .then(response => response.json())
-            .then(data => {
-                if(data.colours.length <1){
-                    alert("no access to any lamps")
-                }
-                setAvailableColors(data.colours.split(','));
-                setColorsLoaded(true);
-            })
-            .catch(error => console.error('Error fetching lamp info:', error));
+        fetchdata();
+
+
+
+
     }, []);
 
     const lamps = availableColors.map((color, index) => (
@@ -29,20 +51,23 @@ const Controller = () => {
     
     return(
         <Layout>
-            
-            {false /*change for videoloaded attribute*/? (
             <div className = "controller-video-container">
-            <div className ="controller-video"></div>
-            </div>)
-            :(<div className="spinner-video-container"><Spinner>Loading video</Spinner></div>)}
-            
-            
-            {colorsLoaded ? (
-            <div className="lamps-container-container">
-            <div className="lamps-container">{lamps}</div>
+            {videoLoaded ? (
+            <img src={videoFeedUrl} alt="Video Feed"></img>
+            )
+            :(<Spinner>Loading video</Spinner>)}
             </div>
-            ):<div className="spinnnner-container"><Spinner>Loading Lamps</Spinner></div>}
             
+            <div className="lamps-container-container">
+            {
+            colorsLoaded ? (
+                availableColors.length > 0 ?(<div className="lamps-container">{lamps}</div>)
+                :(<div>No buttons available with your authority level</div>)
+            )
+            :(<Spinner>Loading buttons</Spinner>)
+            }
+            
+            </div>
             
         </Layout>
     )

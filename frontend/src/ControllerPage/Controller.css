@@ -13,14 +13,14 @@
     
 }
 
-
-.spinner-video-container{
-    background: gray;
-    height: 59vh;
+.account-no-access{
+    position: relative;
+    background-color: red;
+    left: 25vh;
 }
-
 .lamps-container-container{
     display:flex;
+    flex-direction: column;
     align-items: center;
     height: 20.5vh;
 }

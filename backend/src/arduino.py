@@ -36,18 +36,25 @@ def try_attaching_to_arduino():
 
 
 def send_lamp_command_to_arduino(color):
-
+    i=0
+    print('attaching to arduino')
     try_attaching_to_arduino()
     if ser.is_open:
+        print('attaching success')
         ser.reset_input_buffer()
-        while True:
-            command = color + "\n"
+        while i<3:
+            i = i+1
+            print('sending command:', i, "tries")
+            command = str(color) + "\n"
             ser.write(command.encode('utf-8'))
             line = ser.readline().decode('utf-8').rstrip()
-            if line == "success" or line == "failure":
+            print('response for attempt',i, ":", line)
+            if "success" in line or "failure" in line:
                 break
         return line
     else:
+        print('attaching failed')
         return "Could not connect to arduino"
+
 
 

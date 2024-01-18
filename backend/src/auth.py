@@ -12,7 +12,6 @@ class User(UserMixin):
         self.authority = authority
 
 def create_account( username, email, password):
-    print("*Creating account*")
     current_directory = os.path.dirname(os.path.abspath(__file__))
     database_path = os.path.join(current_directory, '..', 'database', 'db.sqlite')
     db = sqlite3.connect(database_path)
@@ -26,7 +25,6 @@ def create_account( username, email, password):
             )
     rows = c.fetchall()
     if rows:
-        print("*username or email exists already*")
         existing_usernames = [row[0] for row in rows]
         existing_emails = [row[1] for row in rows]
 
@@ -36,8 +34,11 @@ def create_account( username, email, password):
             
         if email in existing_emails:
             conflicting_fields.append('email')
-
-
+        response = jsonify({
+                "errorMessage": "Username or email already exists",
+                "conflicting_fields": conflicting_fields
+            })
+        response.status_code = 400
         c.close()
         db.close()
         return response
@@ -54,13 +55,11 @@ def create_account( username, email, password):
         db.commit()
         response = jsonify({"message": "User registered successfully"})
         response.status_code = 201
-        print("*User registered successfully*")
         c.close()
         db.close()
         return response
 
 def login(username_or_email, password):
-    print("*attempting to log in*")
     current_directory = os.path.dirname(os.path.abspath(__file__))
     database_path = os.path.join(current_directory, '..', 'database', 'db.sqlite')
     db = sqlite3.connect(database_path)
@@ -81,10 +80,7 @@ def login(username_or_email, password):
             response = jsonify({"message": "Login successful"})
             response.status_code = 200
             user = User(user_data[0], user_data[1], user_data[4])
-            print(user.id, user.authority, user.username)
-            print("User found in db")
             login_user(user, remember=True)
-            print("login_ method invoked")
             return response
         else:
             response = jsonify({"error": "Invalid password"})
@@ -119,11 +115,8 @@ def load_user(user_id):
 def is_authenticated():
     response = jsonify({
         "is_authenticated": current_user.is_authenticated})
-    if current_user.is_authenticated:
-        response.status_code = 200
-    else:
-        response.status_code = 401
     return response
+
 
 def retrieve_lamps(authority):
     current_directory = os.path.dirname(os.path.abspath(__file__))
