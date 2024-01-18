@@ -1,11 +1,11 @@
 import bcrypt
 from flask import request, Blueprint, jsonify
-from auth import create_account, login, logout, is_authenticated, load_user
+from auth import create_account, login, logout, is_authenticated, load_user,retrieve_lamps, User
 from flask_login import LoginManager, login_required, current_user
 from arduino import send_lamp_command_to_arduino
-
-user_routes = Blueprint('user_routes', __name__)
 login_manager = LoginManager()
+user_routes = Blueprint('user_routes', __name__)
+
 
 @user_routes.route('/create_account', methods=['POST'])
 def create_account_route():
@@ -25,11 +25,35 @@ def logout_route():
 def is_authenticated_route():
     return is_authenticated()
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    response = jsonify({"message": "User not logged in"})
+    response.status_code = 403
+    return response
+
+
+@user_routes.route('/get_lamp_info')
+@login_required
+def get_lamp_info():
+    colors = retrieve_lamps(current_user.authority)
+    response = jsonify({"data":{
+        "colours": colors
+    }})
+    response.status_code = 200
+    return response
 
 @user_routes.route('/send_lamp_command_to_arduino/<color>')
 @login_required
-def run_python_code(color):
-    send_lamp_command_to_arduino(color)
+def send_command_to_arduino(color):
+    colors = retrieve_lamps(current_user.authority)
+    if color in colors:
+        send_lamp_command_to_arduino(color)
+        response = jsonify({"message": "success"})
+        response.status_code = 200
+    else:
+        response = jsonify({"message": "User does not have authorization for this color."})
+        response.status_code = 403
+        return response
 
 @login_manager.user_loader
 def user_loader(user_id):

@@ -36,8 +36,8 @@ def try_attaching_to_arduino():
 
 
 def send_lamp_command_to_arduino(color):
-    try_attaching_to_arduino()
 
+    try_attaching_to_arduino()
     if ser.is_open:
         ser.reset_input_buffer()
         while True:
@@ -49,3 +49,5 @@ def send_lamp_command_to_arduino(color):
         return line
     else:
         return "Could not connect to arduino"
+
+

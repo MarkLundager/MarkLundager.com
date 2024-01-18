@@ -4,7 +4,7 @@ import './Lamp.css'
 const Lamp = ({color}) => {
 
   const handleButtonClick = () => {
-    fetch(`/run_python_code/${color}`)
+    fetch(`/send_lamp_command_to_arduino/${color}`)
     .then((response) => response.json())
     .catch((error) => {
       console.error('Error:', error);

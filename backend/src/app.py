@@ -7,7 +7,6 @@ from user_routes import user_routes,login_manager
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
 app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b9c61f84d6fe3'
 app.config['LOGIN_DISABLED'] = False
-
 login_manager.init_app(app)
 app.register_blueprint(user_routes)
 

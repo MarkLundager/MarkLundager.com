@@ -13,6 +13,9 @@ const Controller = () => {
         fetch('/get_lamp_info')
             .then(response => response.json())
             .then(data => {
+                if(data.colours.length <1){
+                    alert("no access to any lamps")
+                }
                 setAvailableColors(data.colours.split(','));
                 setColorsLoaded(true);
             })

@@ -21,7 +21,7 @@ CREATE TABLE lampauthority (
 INSERT INTO
     lampauthority(authority, lamp)
 VALUES
-    (4, 'GREEN,BLUE,YELLOW,RED'),
-    (3, 'BLUE'),
-    (2, 'YELLOW'),
-    (1, 'RED');
+    (4, 'green,blue,yellow,red'),
+    (3, 'blue'),
+    (2, 'yellow'),
+    (1, 'red');
