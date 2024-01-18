@@ -1,5 +1,6 @@
 Flask
 pyserial
 bcrypt
-flask-cor
+flask_login
+opencv-python
 celery
