@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 from flask_login import login_required, current_user 
 from datetime import datetime
-from user_routes import user_routes,login_manager
+#from user_routes import user_routes,login_manager
 from raspberrypicamera import camera_routes
 #from camera import camera_routes
 
@@ -9,8 +9,8 @@ from raspberrypicamera import camera_routes
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
 app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b9c61f84d6fe3'
 app.config['LOGIN_DISABLED'] = False
-login_manager.init_app(app)
-app.register_blueprint(user_routes)
+#login_manager.init_app(app)
+#app.register_blueprint(user_routes)
 app.register_blueprint(camera_routes)
 
 
