@@ -1,7 +1,7 @@
 from flask import request, Blueprint, jsonify
-from auth import create_account, login, logout, is_authenticated, load_user,retrieve_lamps, User
+from .auth import create_account, login, logout, is_authenticated, load_user,retrieve_lamps, User
 from flask_login import LoginManager, login_required, current_user
-from arduino import send_lamp_command_to_arduino
+from .arduino import send_lamp_command_to_arduino
 
 login_manager = LoginManager()
 user_routes = Blueprint('user_routes', __name__)
