@@ -57,4 +57,5 @@ def send_lamp_command_to_arduino(color):
         return "Could not connect to arduino"
 
 
-
+if __name__ == '__main__':
+    send_lamp_command_to_arduino('green')
