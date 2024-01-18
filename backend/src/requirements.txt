@@ -3,4 +3,3 @@ pyserial
 bcrypt
 celery
 flask_login
-opencv-python
