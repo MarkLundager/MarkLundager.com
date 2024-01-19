@@ -1,5 +1,0 @@
-Flask
-pyserial
-bcrypt
-celery
-flask_login
