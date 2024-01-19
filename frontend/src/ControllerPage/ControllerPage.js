@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import io from 'socket.io-client';
 import Layout from "../LayoutTemplate/Layout";
 import Lamp from './Lamp.js'
 import './Controller.css'
@@ -8,7 +9,7 @@ const Controller = () => {
     const [availableColors, setAvailableColors] = useState([]);
     const [colorsLoaded, setColorsLoaded] = useState(false);
     const [videoLoaded, setVideoLoaded] = useState(false);
-    const videoFeedUrl = 'http://marklundager.com/video_feed';
+    const [videoUrl, setVideoUrl] = useState('');
 
     const fetchdata = async () => {
         try {
@@ -34,7 +35,54 @@ const Controller = () => {
             console.error('Error:', error);
         }
     };
+    const startStream = async () => {
+        try {
+            const response = await fetch('/start_video_stream', {
+                method: 'GET',
+            });
+            if (response.ok) {
+                console.log("video start ok");
+                setVideoLoaded(true);
+            } else {
+                setVideoLoaded(true);
+            }   console.log("video start bad");
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
+    const stopStream = async () => {
+        try {
+            const response = await fetch('/stop_video_stream', {
+                method: 'GET',
+            });
+            if (response.ok) {
+                console.log("video stop ok");
+                setVideoLoaded(false);
+            } else {
+                setVideoLoaded(false);
+            }   console.log("video stop bad");
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    useEffect(() => {
+        const socket = io.connect('http://marklundager.com/get_video');
+    
+        socket.on('videoData', (data) => {
+          const uint8Array = new Uint8Array(data);
+          const blob = new Blob([uint8Array], { type: 'video/mp2t' });
+          const url = URL.createObjectURL(blob);
+            
+          setVideoUrl(url);
+          startStream();
+          
+        });
+        return () => {
+            socket.disconnect();
+          };
+        }, []);
 
     useEffect(() => {
         fetchdata();
@@ -53,7 +101,9 @@ const Controller = () => {
         <Layout>
             <div className = "controller-video-container">
             {videoLoaded ? (
-            <img src={videoFeedUrl} alt="Video Feed"></img>
+              <div>
+              {videoUrl && <video src={videoUrl} controls />}
+            </div>
             )
             :(<Spinner>Loading video</Spinner>)}
             </div>
