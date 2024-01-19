@@ -12,7 +12,7 @@ app.config['LOGIN_DISABLED'] = False
 login_manager.init_app(app)
 app.register_blueprint(user_routes)
 app.register_blueprint(video_routes)
-CORS(app)
+CORS(app, resources={r"/socket.io/*": {"origins": "https://www.marklundager.com"}})
 socketio = SocketIO(app)
 
 @app.route('/')
