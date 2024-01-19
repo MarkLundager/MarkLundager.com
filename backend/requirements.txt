@@ -2,5 +2,4 @@ Flask
 pyserial
 bcrypt
 flask_login
-opencv-python
 celery
