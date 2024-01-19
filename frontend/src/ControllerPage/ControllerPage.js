@@ -68,7 +68,7 @@ const Controller = () => {
     };
 
     useEffect(() => {
-        const socket = io.connect('http://marklundager.com/get_video');
+        const socket = io.connect('https://marklundager.com/get_video');
     
         socket.on('videoData', (data) => {
           const uint8Array = new Uint8Array(data);
