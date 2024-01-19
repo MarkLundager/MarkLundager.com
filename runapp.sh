@@ -4,7 +4,7 @@
 cd ~/MarkLundager.com
 
 # Activate the virtual environment
-source ~/pythonvenv/bin/activate
+source ~/venv/bin/activate
 
 # Run the Python script
 gunicorn -b localhost:8000 backend.src.app:app
