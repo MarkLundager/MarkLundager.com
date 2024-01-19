@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 def generate_frames():
     with picamera.PiCamera() as camera:
-        camera.resolution = (160, 120)
-        camera.framerate = 15
+        camera.resolution = (300, 250)
+        camera.framerate = 20
         time.sleep(2)
         while True:
             stream = io.BytesIO()
@@ -20,7 +20,7 @@ def generate_frames():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_combined.html')
 
 @app.route('/video_feed')
 def video_feed():
