@@ -57,7 +57,7 @@ def handle_connect():
 def handle_disconnect():
     print('Client disconnected')
 
-@socketio.on('request_frame')
+@socketio.on('request_frame', namespace='/video_feed')
 def handle_request_frame():
     camera = Camera()
     for frame in generate(camera):
