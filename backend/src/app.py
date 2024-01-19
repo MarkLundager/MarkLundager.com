@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_login import login_required, current_user 
 from datetime import datetime
 from .user_routes import user_routes,login_manager
-from .raspberrypicamera import camera_routes
+from .normalcamera import camera_routes
 #from camera import camera_routes
 
 #Global variables
