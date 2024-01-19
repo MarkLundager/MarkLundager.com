@@ -1,52 +1,59 @@
-import io
 from flask import Blueprint, Response
-import cv2
-import threading
+from threading import Thread
+import subprocess
 
-camera_routes = Blueprint('camera_routes', __name__)
+video_routes = Blueprint('video_routes', __name__)
 
-class Camera:
+class VideoStream(Thread):
     def __init__(self):
-        self.video_capture = cv2.VideoCapture(0)  # Use the appropriate camera index
+        super().__init__()
+        self.command = "rpicam-vid -t 0 --inline -o -"
+        self.process = None
+        self.frame_generator = None
+        self.is_running = False
 
-        if not self.video_capture.isOpened():
-            raise Exception("Could not open video device")
+    def start_stream(self):
+        self.process = subprocess.Popen(
+            self.command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0
+        )
+        self.frame_generator = self.generate_frames()
+        self.is_running = True
+        self.start()
 
-        self.video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  # Set the width
-        self.video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)  # Set the height
+    def stop_stream(self):
+        if self.process and self.is_running:
+            self.process.kill()
+            self.join()
 
-        self.frame = None
-        self.lock = threading.Lock()
-
-        # Start a separate thread to continuously capture frames
-        self.thread = threading.Thread(target=self._capture_frames, daemon=True)
-        self.thread.start()
-
-    def read(self):
-        with self.lock:
-            return self.frame
-
-    def _capture_frames(self):
-        while True:
-            ret, frame = self.video_capture.read()
-            if not ret:
+    def generate_frames(self):
+        while self.is_running:
+            frame = self.process.stdout.read(1024)
+            if not frame:
                 break
+            yield (
+                b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
+            )
 
-            with self.lock:
-                self.frame = frame
+    def run(self):
+        try:
+            for _ in self.frame_generator:
+                pass
+        finally:
+            self.is_running = False
 
-    def __del__(self):
-        if self.video_capture.isOpened():
-            self.video_capture.release()
+video_stream = VideoStream()
 
-def generate_frames(camera):
-    while True:
-        frame = camera.read()
-        _, buffer = cv2.imencode('.jpg', frame)
-        frame_bytes = buffer.tobytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+@video_routes.route('/start_stream')
+def start_stream():
+    video_stream.start_stream()
+    return 'Streaming started.'
 
-@camera_routes.route('/video_feed')
+@video_routes.route('/stop_stream')
+def stop_stream():
+    video_stream.stop_stream()
+    return 'Streaming stopped.'
+
+@video_routes.route('/video_feed')
 def video_feed():
-    return Response(generate_frames(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(video_stream.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
