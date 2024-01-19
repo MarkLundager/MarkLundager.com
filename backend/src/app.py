@@ -2,9 +2,14 @@ from flask import Flask, render_template, jsonify
 from flask_login import login_required, current_user 
 from datetime import datetime
 from .user_routes import user_routes,login_manager
-from .normalcamera import video_routes
-from flask_socketio import SocketIO
+#from .normalcamera import video_routes
+from flask_socketio import SocketIO, emit
 from flask_cors import CORS
+import base64
+import cv2
+
+
+
 #Global variables
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
 app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b9c61f84d6fe3'
@@ -13,7 +18,7 @@ login_manager.init_app(app)
 app.register_blueprint(user_routes)
 app.register_blueprint(video_routes)
 CORS(app, resources={r"/socket.io/*": {"origins": "https://www.marklundager.com"}})
-socketio = SocketIO(app)
+socketio = SocketIO(app, path='/get_video/socket.io/')
 
 @app.route('/')
 def index():
@@ -64,5 +69,25 @@ def handle_disconnect():
     print('Client disconnected')
 
 
+import threading
+
+def send_video_stream():
+    video_capture = cv2.VideoCapture(0)  # Change the index if you have multiple cameras
+
+    while True:
+        ret, frame = video_capture.read()
+        if not ret:
+            break
+
+        # Convert the frame to base64
+        _, buffer = cv2.imencode('.jpg', frame)
+        frame_data = base64.b64encode(buffer)
+
+        # Send the frame to all connected clients
+        emit('videoData', frame_data.decode(), broadcast=True)
+
+
 if __name__ == '__main__':
+    video_thread = threading.Thread(target=send_video_stream)
+    video_thread.start()
     app.run(host='0.0.0.0', port=8000)

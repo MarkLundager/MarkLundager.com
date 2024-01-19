@@ -1,14 +1,15 @@
 from flask import jsonify, Blueprint
 import subprocess
-import threading
 import signal
 import os
+
 video_routes = Blueprint('video_routes', __name__)
 
 stream_pid = None
 stream_on = False
 
 def start_video_stream():
+    print("STARTING VIDEO")
     global stream_pid
     command = "rpicam-vid -t 0 --codec libav --libav-format mpegts -o 'tcp://marklundager.com/video_feed:8000'"
     process = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
@@ -16,6 +17,7 @@ def start_video_stream():
 
 
 def stop_video_stream():
+    print("STOPPING VIDEO")
     global stream_pid
     if stream_on:
         os.killpg(os.getpgid(stream_pid), signal.SIGTERM)
@@ -24,8 +26,7 @@ def stop_video_stream():
 @video_routes.route('/start_video_stream')
 def start_video_stream_route():
     if not stream_on:
-        video_thread = threading.Thread(target=start_video_stream)
-        video_thread.start()
+        start_video_stream
         stream_on = True
         return jsonify({'status': 'Video stream started'})
     else:
