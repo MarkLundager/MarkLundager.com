@@ -7,7 +7,6 @@ cd ~/MarkLundager.com
 source ~/venv/bin/activate
 
 # Run the Python script
-#gunicorn -b localhost:8000 backend.src.app:app
-gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 -b 0.0.0.0:8000 backend.src.app:app
+gunicorn -b localhost:8000 combined_sockets:app
 #python3 backend/src/app.py
 
