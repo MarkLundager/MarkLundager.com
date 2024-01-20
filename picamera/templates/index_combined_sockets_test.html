@@ -16,11 +16,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var socket = io.connect(
-          "https://" + document.domain + ":" + location.port + "/video_feed"
-        );
-        console.log("domain: ", document.domain);
+        console.log(document.domain);
         console.log("port: ", location.port);
+        // var socket = io.connect(
+        //   "https://" + document.domain + ":" + location.port + "/video_feed"
+        // );
+        var socket = io.connect(
+          "https://" + "marklundager" + ":" + "" + "/video_feed"
+        );
+
         socket.on("connect", function () {
           console.log("Connected to server");
         });
@@ -30,7 +34,6 @@
         });
 
         socket.on("video_frame", function (data) {
-          console.log("getting frame");
           var img = document.getElementById("video_feed");
           // Check if data.frame is an ArrayBuffer
           if (data.frame instanceof ArrayBuffer) {

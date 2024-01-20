@@ -4,7 +4,7 @@ import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
-app = Flask(__name__, static_folder='../frontend/build/static', template_folder='../frontend/build')
+app = Flask(__name__)
 socketio = SocketIO(app)
 
 generate_frames_flag = False  # Shared flag to track if frames are being generated
@@ -24,7 +24,7 @@ def generate_frames():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_combined_sockets_test.html')
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
