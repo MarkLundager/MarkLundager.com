@@ -22,7 +22,7 @@ def generate_frames():
                 stream.seek(0)
                 stream.truncate()
 
-@app.route('/video')
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -45,4 +45,4 @@ def handle_request_frame():
         print('Frames are already being generated. Ignoring request.')
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=8001, debug=False)
+    socketio.run(app, host='0.0.0.0', port=8000, debug=False)
