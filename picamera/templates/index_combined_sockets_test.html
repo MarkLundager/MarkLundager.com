@@ -31,6 +31,7 @@
         });
 
         socket.on("video_frame", function (data) {
+          console.log("getting frame");
           var img = document.getElementById("video_feed");
           // Check if data.frame is an ArrayBuffer
           if (data.frame instanceof ArrayBuffer) {
