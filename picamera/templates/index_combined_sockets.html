@@ -30,11 +30,16 @@
 
         socket.on("video_frame", function (data) {
           var img = document.getElementById("video_feed");
-          // Convert ArrayBuffer to base64 string
-          var base64String = btoa(
-            String.fromCharCode.apply(null, new Uint8Array(data.frame))
-          );
-          img.src = "data:image/jpeg;base64," + base64String;
+          // Check if data.frame is an ArrayBuffer
+          if (data.frame instanceof ArrayBuffer) {
+            // Convert ArrayBuffer to base64 string
+            var base64String = btoa(
+              String.fromCharCode.apply(null, new Uint8Array(data.frame))
+            );
+            img.src = "data:image/jpeg;base64," + base64String;
+          } else {
+            console.error("Invalid frame data received");
+          }
         });
 
         socket.emit("request_frame");
