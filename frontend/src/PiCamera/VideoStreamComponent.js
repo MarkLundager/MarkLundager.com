@@ -3,8 +3,9 @@ import io from 'socket.io-client';
 const VideoStreamComponent = () => {
   useEffect(() => {
     const socket = io.connect(
-      `https://marklundager.com:8001/video_feed`
+      "https://" + "marklundager.com" + ":" + "8001" + "/video_feed"
     );
+
 
     socket.on('connect', () => {
       console.log('Connected to server');
