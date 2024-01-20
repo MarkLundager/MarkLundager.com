@@ -22,6 +22,8 @@
 
         socket.on("connect", function () {
           console.log("Connected to server");
+          console.log("domain: ", document.domain);
+          console.log("port: ", location.port);
         });
 
         socket.on("disconnect", function () {
