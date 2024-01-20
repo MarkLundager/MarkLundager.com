@@ -11,7 +11,7 @@ generate_frames_flag = False  # Shared flag to track if frames are being generat
 
 def generate_frames():
     with picamera.PiCamera() as camera:
-        camera.resolution = (300), (250)
+        camera.resolution = (600), (500)
         camera.framerate = 20
         time.sleep(2)
         while True:
