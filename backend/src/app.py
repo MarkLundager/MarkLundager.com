@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b
 app.config['LOGIN_DISABLED'] = False
 login_manager.init_app(app)
 app.register_blueprint(user_routes)
-socketio.init_app(app)
+socket_io.init_app(app)
 
 @app.route('/')
 def index():
