@@ -3,3 +3,6 @@ pyserial
 bcrypt
 flask_login
 celery
+Flask-SocketIO
+gunicorn
+picamera
