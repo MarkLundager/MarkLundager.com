@@ -24,7 +24,7 @@ def generate_frames():
 
 @app.route('/')
 def index():
-    return render_template('index')
+    return render_template('index.html')
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
