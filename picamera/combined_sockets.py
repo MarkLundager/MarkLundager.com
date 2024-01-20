@@ -9,7 +9,7 @@ socketio = SocketIO(app)
 
 def generate_frames():
     with picamera.PiCamera() as camera:
-        camera.resolution = (1080, 1920)
+        camera.resolution = (720, 1280)
         camera.framerate = 20
         time.sleep(2)
         while True:
