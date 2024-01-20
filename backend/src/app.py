@@ -1,8 +1,8 @@
 from flask import Flask, render_template, jsonify
 from flask_login import login_required, current_user 
 from datetime import datetime
-from .user_routes import user_routes,login_manager
-from .pi_camera import socketio
+from user_routes import user_routes,login_manager
+from pi_camera import socketio
 
 
 #Global variables
