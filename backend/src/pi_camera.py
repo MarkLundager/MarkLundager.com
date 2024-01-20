@@ -2,10 +2,10 @@ import io
 import picamera
 import time
 from flask import Flask, render_template
-
+from flask_socketio import SocketIO
 
 generate_frames_flag = False  # Shared flag to track if frames are being generated
-
+socketio = SocketIO()
 
 def generate_frames():
     with picamera.PiCamera() as camera:

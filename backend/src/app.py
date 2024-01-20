@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from datetime import datetime
 from .user_routes import user_routes,login_manager
 from .pi_camera import *
-from flask_socketio import SocketIO
+
 
 #Global variables
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b
 app.config['LOGIN_DISABLED'] = False
 login_manager.init_app(app)
 app.register_blueprint(user_routes)
-socketio = SocketIO(app)
+socketio.init_app(app)
 
 @app.route('/')
 def index():
@@ -55,4 +55,5 @@ def calculate_time_remaining():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    socketio.run(app, host='0.0.0.0', port=8000)
+    #app.run(host='0.0.0.0', port=8000)
