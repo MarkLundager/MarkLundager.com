@@ -23,15 +23,15 @@ def generate_frames():
 def index():
     return render_template('index_combined_sockets.html')
 
-@socketio.on('connect')
+@socketio.on('connect', namespace='/video_feed')
 def handle_connect():
     print('Client connected')
 
-@socketio.on('disconnect')
+@socketio.on('disconnect', namespace='/video_feed')
 def handle_disconnect():
     print('Client disconnected')
 
-@socketio.on('request_frame')
+@socketio.on('request_frame', namespace='/video_feed')
 def handle_request_frame():
     for frame in generate_frames():
         socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
