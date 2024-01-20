@@ -4,8 +4,10 @@ import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
+app = Flask(__name__)
+socketio = SocketIO(app)
+
 generate_frames_flag = False  # Shared flag to track if frames are being generated
-socketio = SocketIO()
 
 def generate_frames():
     with picamera.PiCamera() as camera:
@@ -19,6 +21,10 @@ def generate_frames():
                 yield stream.getvalue()
                 stream.seek(0)
                 stream.truncate()
+
+@app.route('/')
+def index():
+    return render_template('index_combined_sockets.html')
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
@@ -37,3 +43,6 @@ def handle_request_frame():
             socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
     else:
         print('Frames are already being generated. Ignoring request.')
+
+if __name__ == '__main__':
+    socketio.run(app, host='0.0.0.0', port=8001, debug=False)

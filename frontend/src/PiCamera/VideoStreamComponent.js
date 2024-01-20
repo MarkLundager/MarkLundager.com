@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 const VideoStreamComponent = () => {
   useEffect(() => {
     const socket = io.connect(
-      `https://${document.domain}:${window.location.port}/video_feed`
+      `https://marklundager.com:8001/video_feed`
     );
 
     socket.on('connect', () => {
@@ -15,6 +15,7 @@ const VideoStreamComponent = () => {
     });
 
     socket.on('video_frame', (data) => {
+      console.log("receiving images");
       const img = document.getElementById('video_feed');
 
       if (data.frame instanceof ArrayBuffer) {
