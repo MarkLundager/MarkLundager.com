@@ -4,12 +4,11 @@ import Layout from "../LayoutTemplate/Layout";
 import Lamp from './Lamp.js'
 import './Controller.css'
 import Spinner from "../GeneralComponents/Spinner.js";
+import VideoStreamerComponent from "../PiCamera/VideoStreamComponent.js"
 
 const Controller = () => {
     const [availableColors, setAvailableColors] = useState([]);
     const [colorsLoaded, setColorsLoaded] = useState(false);
-    const [videoLoaded, setVideoLoaded] = useState(false);
-    const [videoUrl, setVideoUrl] = useState('');
 
     const fetchdata = async () => {
         try {
@@ -22,11 +21,9 @@ const Controller = () => {
                 if (colours) {
                     setAvailableColors(colours.split(','));
                     setColorsLoaded(true);
-                    setVideoLoaded(true);
                 } else {
                     console.error('Data or data.colours is undefined');
                     setColorsLoaded(true);
-                    setVideoLoaded(true);
                 }
             } else {
                 alert('Could not communicate with server');
@@ -35,54 +32,6 @@ const Controller = () => {
             console.error('Error:', error);
         }
     };
-    const startStream = async () => {
-        try {
-            const response = await fetch('/start_video_stream', {
-                method: 'GET',
-            });
-            if (response.ok) {
-                console.log("video start ok");
-                setVideoLoaded(true);
-            } else {
-                setVideoLoaded(true);
-            }   console.log("video start bad");
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const stopStream = async () => {
-        try {
-            const response = await fetch('/stop_video_stream', {
-                method: 'GET',
-            });
-            if (response.ok) {
-                console.log("video stop ok");
-                setVideoLoaded(false);
-            } else {
-                setVideoLoaded(false);
-            }   console.log("video stop bad");
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    useEffect(() => {
-        const socket = io.connect('https://marklundager.com', { path: '/get_video/socket.io/' });
-    
-        socket.on('videoData', (data) => {
-          const uint8Array = new Uint8Array(data);
-          const blob = new Blob([uint8Array], { type: 'video/mp2t' });
-          const url = URL.createObjectURL(blob);
-            
-          setVideoUrl(url);
-          startStream();
-          
-        });
-        return () => {
-            socket.disconnect();
-          };
-        }, []);
 
     useEffect(() => {
         fetchdata();
@@ -100,12 +49,10 @@ const Controller = () => {
     return(
         <Layout>
             <div className = "controller-video-container">
-            {videoLoaded ? (
-              <div>
-              {videoUrl && <video src={videoUrl} controls />}
-            </div>
-            )
-            :(<Spinner>Loading video</Spinner>)}
+            
+                <VideoStreamerComponent></VideoStreamerComponent>
+            
+            <Spinner>Loading video</Spinner>
             </div>
             
             <div className="lamps-container-container">
