@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 const VideoStreamComponent = () => {
   useEffect(() => {
     const socket = io.connect(
-      "https://" + "marklundager.com" + ":" + "8001" + "/video_feed"
+      "https://" + "marklundager.com" + ":" + "/video_feed"
     );
 
 
