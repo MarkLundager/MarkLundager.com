@@ -51,7 +51,6 @@ def handle_request_frame():
         generate_frames_flag = True
         for frame in generate_frames():
             if generate_frames_flag:
-                print("frames sent")
                 socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
             else:
                 break
