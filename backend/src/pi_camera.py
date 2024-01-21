@@ -7,6 +7,7 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
 
 def generate_frames():
@@ -28,10 +29,16 @@ def index():
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
+    connected += 1
+    if connected > 0:
+        generate_frames_flag = True
     print('Client connected')
 
 @socketio.on('disconnect', namespace='/video_feed')
 def handle_disconnect():
+    connected -= 1
+    if connected == 0:
+        generate_frames_flag = False
     print('Client disconnected')
 
 @socketio.on('request_frame', namespace='/video_feed')
@@ -40,7 +47,11 @@ def handle_request_frame():
     if not generate_frames_flag:
         generate_frames_flag = True
         for frame in generate_frames():
-            socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
+            if generate_frames_flag:
+                print("frames sent")
+                socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
+            else:
+                break
     else:
         print('Frames are already being generated. Ignoring request.')
 

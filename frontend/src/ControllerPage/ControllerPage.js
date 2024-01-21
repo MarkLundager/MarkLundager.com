@@ -48,10 +48,7 @@ const Controller = () => {
     return(
         <Layout>
             <div className = "controller-video-container">
-            
                 <VideoStreamerComponent></VideoStreamerComponent>
-            
-            <Spinner>Loading video</Spinner>
             </div>
             
             <div className="lamps-container-container">

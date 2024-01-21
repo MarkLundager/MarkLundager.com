@@ -6,7 +6,7 @@ import VideoStreamComponent from"../PiCamera/VideoStreamComponent";
 const HomePage = () => {
 
     return(
-        <Layout><VideoStreamComponent></VideoStreamComponent><TimeUnilCanada></TimeUnilCanada></Layout>
+        <Layout><TimeUnilCanada></TimeUnilCanada></Layout>
         
     );
 };
