@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Spinner from '../GeneralComponents/Spinner';
+import './VideoStreamComponent.css'
 
 const VideoStreamComponent = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -52,8 +53,8 @@ const VideoStreamComponent = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div>
-      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
+    <div className = "videoContainer">
+      {true ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
     </div>
 
   );
