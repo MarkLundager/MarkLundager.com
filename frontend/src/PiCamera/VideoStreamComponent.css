@@ -1,11 +1,13 @@
-.videoContainer{
-    width:80%;
+.videoContainer {
+    width: 80%;
     height: 59vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-img{
-    height: 59vh;
+img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
 }
