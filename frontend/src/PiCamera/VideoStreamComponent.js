@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import io from 'socket.io-client';
+import Spinner from '../GeneralComponents/Spinner';
+
 const VideoStreamComponent = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
   useEffect(() => {
     const socket = io.connect(
       "https://" + "www.marklundager.com" + ":" + "" + "/video_feed"
@@ -16,6 +19,9 @@ const VideoStreamComponent = () => {
     });
 
     socket.on('video_frame', (data) => {
+      if(!videoLoaded){
+        setVideoLoaded(true);
+      }
       console.log("receiving images");
       const img = document.getElementById('video_feed');
 
@@ -40,8 +46,9 @@ const VideoStreamComponent = () => {
 
   return (
     <div>
-      <img id="video_feed" alt="Video Stream" style={{ width: '100%', height: 'auto' }} />
+      {videoLoaded ?(<img id="video_feed" alt="Video Stream" style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
     </div>
+
   );
 };
 

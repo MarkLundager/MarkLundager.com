@@ -48,7 +48,7 @@ const Controller = () => {
     return(
         <Layout>
             <div className = "controller-video-container">
-                <VideoStreamerComponent></VideoStreamerComponent>
+            <VideoStreamerComponent></VideoStreamerComponent>
             </div>
             
             <div className="lamps-container-container">
