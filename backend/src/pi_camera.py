@@ -11,6 +11,7 @@ connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
 
 def generate_frames():
+    global generate_frames_flag
     with picamera.PiCamera() as camera:
         camera.resolution = (300), (250)
         camera.framerate = 20
@@ -29,6 +30,8 @@ def index():
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
+    global connected
+    global generate_frames_flag
     connected += 1
     if connected > 0:
         generate_frames_flag = True
@@ -36,6 +39,8 @@ def handle_connect():
 
 @socketio.on('disconnect', namespace='/video_feed')
 def handle_disconnect():
+    global connected
+    global generate_frames_flag
     connected -= 1
     if connected == 0:
         generate_frames_flag = False
