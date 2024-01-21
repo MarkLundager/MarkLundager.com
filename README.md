@@ -15,3 +15,4 @@ Mark's webpage
 - Handle communication between client and server better in order to inform users better
 - Structure backend better, especially regarding login_manager
 - Add requirements on password and username (length, characters etc.)
+- Create admin page to handle authorities.
