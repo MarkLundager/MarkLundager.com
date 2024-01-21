@@ -29,6 +29,7 @@ const VideoStreamComponent = () => {
       }
     });
 
+    console.log("emitting request_frame");
     socket.emit('request_frame');
 
     // Cleanup when the component unmounts
