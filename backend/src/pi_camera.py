@@ -24,7 +24,7 @@ def generate_frames():
 
 @app.route('/home')
 def index():
-    return render_template('index_combined_sockets.html')
+    return render_template('index_combined_sockets_test.html')
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
@@ -45,4 +45,4 @@ def handle_request_frame():
         print('Frames are already being generated. Ignoring request.')
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=8001, debug=False)
+    socketio.run(app, host='0.0.0.0', port=8001, debug=True)
