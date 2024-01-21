@@ -22,7 +22,7 @@ def generate_frames():
                 stream.seek(0)
                 stream.truncate()
 
-@app.route('/')
+@app.route('/home')
 def index():
     return render_template('index_combined_sockets.html')
 
