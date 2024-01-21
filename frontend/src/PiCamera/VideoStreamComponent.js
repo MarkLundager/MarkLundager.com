@@ -54,7 +54,7 @@ const VideoStreamComponent = () => {
 
   return (
     <div className = "videoContainer">
-      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
+      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: '59vh' }} />):(<Spinner>Loading Video</Spinner>)}
     </div>
 
   );
