@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import io from 'socket.io-client';
 import Layout from "../LayoutTemplate/Layout";
 import Lamp from './Lamp.js'
 import './Controller.css'
