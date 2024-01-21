@@ -19,9 +19,6 @@ const VideoStreamComponent = () => {
     });
 
     socket.on('video_frame', (data) => {
-      if(!videoLoaded){
-        setVideoLoaded(true);
-      }
       console.log("receiving images");
       const img = document.getElementById('video_feed');
 
@@ -32,6 +29,9 @@ const VideoStreamComponent = () => {
         img.src = `data:image/jpeg;base64,${base64String}`;
       } else {
         console.error('Invalid frame data received');
+      }
+      if(!videoLoaded){
+        setVideoLoaded(true);
       }
     });
 
