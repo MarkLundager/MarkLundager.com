@@ -33,8 +33,6 @@ def handle_connect():
     global connected
     global generate_frames_flag
     connected += 1
-    if connected > 0:
-        generate_frames_flag = True
     print('Client connected')
 
 @socketio.on('disconnect', namespace='/video_feed')
