@@ -8,4 +8,4 @@ source ~/venv/bin/activate
 
 # Run the Python script
 gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 -b 0.0.0.0:8001 combined_sockets_test_react:app &
-gunicorn -b localhost:8000 combined_sockets_test_react_frontend:app &
+gunicorn -b localhost:8000 ..backend.src.app:app &
