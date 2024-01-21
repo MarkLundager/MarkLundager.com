@@ -4,7 +4,7 @@ import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
-app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
+app = Flask(__name__, static_folder='../frontend/build/static', template_folder='../frontend/build')
 socketio = SocketIO(app)
 
 generate_frames_flag = False  # Shared flag to track if frames are being generated
