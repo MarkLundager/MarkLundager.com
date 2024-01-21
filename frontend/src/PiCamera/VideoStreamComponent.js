@@ -4,6 +4,7 @@ import Spinner from '../GeneralComponents/Spinner';
 
 const VideoStreamComponent = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState('');
   useEffect(() => {
     const socket = io.connect(
       "https://" + "www.marklundager.com" + ":" + "" + "/video_feed"
@@ -26,7 +27,8 @@ const VideoStreamComponent = () => {
         const base64String = btoa(
           String.fromCharCode.apply(null, new Uint8Array(data.frame))
         );
-        img.src = `data:image/jpeg;base64,${base64String}`;
+        //img.src = `data:image/jpeg;base64,${base64String}`;
+        setImgSrc(`data:image/jpeg;base64,${base64String}`);
         setVideoLoaded(true);
         // setVideoLoaded((prevVideoLoaded) => {
         //   if (!prevVideoLoaded) {
@@ -51,7 +53,7 @@ const VideoStreamComponent = () => {
 
   return (
     <div>
-      {videoLoaded ?(<img id="video_feed" alt="Video Stream" style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
+      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: 'auto' }} />):(<Spinner>Loading Video</Spinner>)}
     </div>
 
   );
