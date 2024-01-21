@@ -27,12 +27,13 @@ const VideoStreamComponent = () => {
           String.fromCharCode.apply(null, new Uint8Array(data.frame))
         );
         img.src = `data:image/jpeg;base64,${base64String}`;
-        setVideoLoaded((prevVideoLoaded) => {
-          if (!prevVideoLoaded) {
-            console.log("WE GOT VIDEO BABY");
-          }
-          return true;
-        });
+        setVideoLoaded(true);
+        // setVideoLoaded((prevVideoLoaded) => {
+        //   if (!prevVideoLoaded) {
+        //     console.log("WE GOT VIDEO BABY");
+        //   }
+        //   return true;
+        // });
       } else {
         console.error('Invalid frame data received');
       }
