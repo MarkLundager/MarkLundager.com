@@ -7,10 +7,12 @@ const VideoStreamComponent = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState('');
   useEffect(() => {
+    // const socket = io.connect(
+    //   "https://" + "www.marklundager.com" + ":" + "" + "/video_feed"
+    // );
     const socket = io.connect(
-      "https://" + "www.marklundager.com" + ":" + "" + "/video_feed"
+      "wss://" + "www.marklundager.com" + ":" + "" + "/video_feed"
     );
-
 
     socket.on('connect', () => {
       console.log('Connected to server');
