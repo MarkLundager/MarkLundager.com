@@ -11,10 +11,6 @@ login_manager.init_app(app)
 app.register_blueprint(user_routes)
 
 CORS(app)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
     
 
 @app.route('/timeUntilCanada', methods=['GET'])
@@ -51,7 +47,10 @@ def calculate_time_remaining():
 
     # Implement a function to load the user from your database
     # Example: return User(user_id, username, authority)
-
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
