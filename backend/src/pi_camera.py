@@ -2,7 +2,7 @@ import io
 import picamera
 import time
 from flask import Flask, render_template
-from flask_socketio import SocketIO, CORS
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
 #socketio = SocketIO(app)
