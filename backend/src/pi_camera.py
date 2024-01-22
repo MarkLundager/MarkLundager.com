@@ -3,9 +3,10 @@ import picamera
 import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from flask_cors import CORS
 
 socketapp = Flask(__name__)
-#socketio = SocketIO(socketapp)
+CORS(socketapp, resources={r"/video_feed": {"origins": "https://www.marklundager.com"}})
 socketio = SocketIO(socketapp, cors_allowed_origins="https://www.marklundager.com")
 connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated

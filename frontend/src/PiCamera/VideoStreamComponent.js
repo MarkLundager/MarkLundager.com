@@ -7,9 +7,6 @@ const VideoStreamComponent = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState('');
   useEffect(() => {
-    // const socket = io.connect(
-    //   "https://" + "www.marklundager.com" + ":" + "" + "/video_feed"
-    // );
     const socket = io.connect(
       "wss://" + "www.marklundager.com" + ":" + "" + "/video_feed"
     );
@@ -30,15 +27,8 @@ const VideoStreamComponent = () => {
         const base64String = btoa(
           String.fromCharCode.apply(null, new Uint8Array(data.frame))
         );
-        //img.src = `data:image/jpeg;base64,${base64String}`;
         setImgSrc(`data:image/jpeg;base64,${base64String}`);
         setVideoLoaded(true);
-        // setVideoLoaded((prevVideoLoaded) => {
-        //   if (!prevVideoLoaded) {
-        //     console.log("WE GOT VIDEO BABY");
-        //   }
-        //   return true;
-        // });
       } else {
         console.error('Invalid frame data received');
       }
