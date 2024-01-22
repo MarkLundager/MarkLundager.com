@@ -10,19 +10,34 @@ socketio = SocketIO(app, cors_allowed_origins="https://www.marklundager.com")
 connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
 
+# def generate_frames():
+#     global generate_frames_flag
+#     with picamera.PiCamera() as camera:
+#         camera.resolution = (300), (250)
+#         camera.framerate = 20
+#         time.sleep(2)
+#         while True:
+#             if generate_frames_flag:
+#                 stream = io.BytesIO()
+#                 camera.capture(stream, format='jpeg', use_video_port=True)
+#                 yield stream.getvalue()
+#                 stream.seek(0)
+#                 stream.truncate()
+
 def generate_frames():
     global generate_frames_flag
-    with picamera.PiCamera() as camera:
-        camera.resolution = (300), (250)
-        camera.framerate = 20
-        time.sleep(2)
-        while True:
-            if generate_frames_flag:
-                stream = io.BytesIO()
-                camera.capture(stream, format='jpeg', use_video_port=True)
-                yield stream.getvalue()
-                stream.seek(0)
-                stream.truncate()
+    camera = picamera.PiCamera()
+    camera.resolution = (300), (250)
+    camera.framerate = 20
+    time.sleep(2)
+    while True:
+        if generate_frames_flag:
+            stream = io.BytesIO()
+            camera.capture(stream, format='jpeg', use_video_port=True)
+            yield stream.getvalue()
+            stream.seek(0)
+            stream.truncate()
+
 
 @app.route('/home')
 def index():
