@@ -6,7 +6,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 
 socketapp = Flask(__name__)
-CORS(socketapp, resources={r"/video_feed": {"origins": "*"}})
+CORS(socketapp)
 socketio = SocketIO(socketapp, cors_allowed_origins="*")
 connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
