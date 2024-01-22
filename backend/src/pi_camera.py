@@ -48,8 +48,10 @@ def handle_disconnect():
 def handle_request_frame():
     global generate_frames_flag
     if not generate_frames_flag:
+        print("going to send frames")
         generate_frames_flag = True
         for frame in generate_frames():
+            print("sending frames")
             if generate_frames_flag:
                 socketio.emit('video_frame', {'frame': frame}, namespace='/video_feed')
             else:
