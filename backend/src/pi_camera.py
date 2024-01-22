@@ -61,4 +61,4 @@ def handle_request_frame():
         print('Frames are already being generated. Ignoring request.')
 
 if __name__ == '__main__':
-    socketio.run(socketapp, host='0.0.0.0', port=8001, debug=False)
+    socketio.run(socketapp, host='0.0.0.0', port=8001, debug=True)
