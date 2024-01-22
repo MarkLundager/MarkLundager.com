@@ -19,6 +19,10 @@ const VideoStreamComponent = () => {
       console.log('Disconnected from server');
     });
 
+    window.addEventListener('beforeunload', () => {
+      socket.disconnect();
+    });
+
     socket.on('video_frame', (data) => {
       const img = document.getElementById('video_feed');
 
