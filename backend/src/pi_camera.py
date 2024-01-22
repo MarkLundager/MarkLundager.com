@@ -5,8 +5,8 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, CORS
 
 app = Flask(__name__)
-socketio = SocketIO(app)
-CORS(socketio, resources={r"/socket.io/*": {"origins": "https://www.marklundager.com"}})
+#socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="https://www.marklundager.com")
 connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
 
