@@ -26,6 +26,7 @@ const VideoStreamComponent = () => {
       const img = document.getElementById('video_feed');
 
       if (data.frame instanceof ArrayBuffer) {
+        console.log("image received");
         const base64String = btoa(
           String.fromCharCode.apply(null, new Uint8Array(data.frame))
         );
