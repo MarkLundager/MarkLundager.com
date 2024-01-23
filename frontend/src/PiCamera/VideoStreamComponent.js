@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Spinner from '../GeneralComponents/Spinner';
-import './VideoStreamComponent.css'
+import './VideoStreamComponent.css';
 
 const VideoStreamComponent = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+
   useEffect(() => {
     const socket = io.connect(
       "wss://" + "www.marklundager.com" + ":" + "" + "/video_feed"
@@ -13,10 +15,12 @@ const VideoStreamComponent = () => {
 
     socket.on('connect', () => {
       console.log('Connected to server');
+      setIsConnected(true);
     });
 
     socket.on('disconnect', () => {
       console.log('Disconnected from server');
+      setIsConnected(false);
     });
 
     window.addEventListener('beforeunload', () => {
@@ -36,23 +40,27 @@ const VideoStreamComponent = () => {
       } else {
         console.error('Invalid frame data received');
       }
-
     });
 
-    console.log("emitting request_frame");
-    socket.emit('request_frame');
+    if (isConnected) {
+      console.log("emitting request_frame");
+      socket.emit('request_frame');
+    }
 
     // Cleanup when the component unmounts
     return () => {
       socket.disconnect();
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [isConnected]); // Dependency array includes isConnected
 
   return (
-    <div className = "videoContainer">
-      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: '59vh' }} />):(<Spinner>Loading Video</Spinner>)}
+    <div className="videoContainer">
+      {videoLoaded ? (
+        <img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: '59vh' }} />
+      ) : (
+        <Spinner>Loading Video</Spinner>
+      )}
     </div>
-
   );
 };
 
