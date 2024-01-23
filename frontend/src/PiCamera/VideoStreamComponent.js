@@ -51,7 +51,7 @@ const VideoStreamComponent = () => {
     return () => {
       socket.disconnect();
     };
-  }, [isConnected]); // Dependency array includes isConnected
+  }, []); // Dependency array includes isConnected
 
   return (
     <div className="videoContainer">
