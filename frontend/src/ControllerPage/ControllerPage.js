@@ -25,7 +25,7 @@ const Controller = () => {
                     setColorsLoaded(true);
                 }
             } else {
-                alert('Could not communicate with server');
+                setColorsLoaded(true);
             }
         } catch (error) {
             console.error('Error:', error);
