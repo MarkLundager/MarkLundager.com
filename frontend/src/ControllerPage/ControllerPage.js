@@ -51,7 +51,7 @@ const Controller = () => {
             {
             colorsLoaded ? (
                 availableColors.length > 0 ?(<VideoStreamerComponent></VideoStreamerComponent>)
-                :(<div>No buttons available with your authority level</div>)
+                :(<div>No video available with your authority level</div>)
             )
             :(<Spinner>Loading Video</Spinner>)
             }
