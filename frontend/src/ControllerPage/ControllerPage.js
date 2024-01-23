@@ -48,7 +48,13 @@ const Controller = () => {
     return(
         <Layout>
             <div className = "controller-video-container">
-            <VideoStreamerComponent></VideoStreamerComponent>
+            {
+            colorsLoaded ? (
+                availableColors.length > 0 ?(<VideoStreamerComponent></VideoStreamerComponent>)
+                :(<div>No buttons available with your authority level</div>)
+            )
+            :(<Spinner>Loading Video</Spinner>)
+            }
             </div>
             
             <div className="lamps-container-container">
