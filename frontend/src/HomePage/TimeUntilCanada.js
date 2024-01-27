@@ -55,7 +55,7 @@ const TimeUnilCanada = () => {
     return (
       <div id="TimeUntilCanada" className="TimeUntilCanada">
         <section className="wrapper">
-          <div className="top">Time Until Canada</div>
+          <div className="top"></div>
           <div className="timeRemaning">Days: {timeLeft.days} Hours: {timeLeft.hours} Minutes: {timeLeft.minutes} Seconds: {timeLeft.seconds}</div>
         </section>
       </div>
