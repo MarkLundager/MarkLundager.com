@@ -18,3 +18,4 @@ Mark's webpage
 - Create admin page to handle authorities.
 - Fix resolution on stream
 - Create chat system
+- Make webpage mobile friendly
