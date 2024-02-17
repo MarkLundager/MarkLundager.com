@@ -17,3 +17,4 @@ Mark's webpage
 - Add requirements on password and username (length, characters etc.)
 - Create admin page to handle authorities.
 - Fix resolution on stream
+- Create chat system
