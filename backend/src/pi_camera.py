@@ -7,9 +7,7 @@ from flask_cors import CORS
 
 socketapp = Flask(__name__)
 CORS(socketapp)
-#socketio = SocketIO(socketapp)
 socketio = SocketIO(socketapp, cors_allowed_origins="*")
-connected = 0
 generate_frames_flag = False  # Shared flag to track if frames are being generated
 
 def generate_frames():
@@ -33,18 +31,12 @@ def index():
 
 @socketio.on('connect', namespace='/video_feed')
 def handle_connect():
-    global connected
     global generate_frames_flag
-    connected += 1
     print('Client connected')
 
 @socketio.on('disconnect', namespace='/video_feed')
 def handle_disconnect():
-    global connected
     global generate_frames_flag
-    connected -= 1
-    if connected == 0:
-        generate_frames_flag = False
     print('Client disconnected')
 
 @socketio.on('request_frame', namespace='/video_feed')
