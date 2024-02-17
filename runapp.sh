@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change to the myapp directory
-cd ~/MarkLundager.com
+cd ~/marklundager.com
 
 # Activate the virtual environment
 source ~/venv/bin/activate
