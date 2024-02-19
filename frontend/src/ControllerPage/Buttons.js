@@ -6,32 +6,34 @@ const Buttons = ({ onButtonClick }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const handleButtonClick = (action) => {
-    setDivColor(action === 'off' ? 'red' : 'green');
-    onButtonClick(action);
+    fetch(`/run_python_code/${action}`)
+    .then((response) => response.json())
+    .then(setDivColor(action === 'off' ? 'red' : 'green'))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    
+
   };
 
   useEffect(() => {
     fetch('/lamp_status')
       .then(response => response.json())
       .then(data => {
-        console.log('Data type of lamp_on:', typeof data.lightOn);
-        console.log('Actual value of lamp_on:', data.lightOn);
-        console.log(data.lightOn === false ? 'red' : 'green')
         setDivColor(data.lightOn === false ? 'red' : 'green');
-        setDataLoaded(true);  // Mark that the data has been loaded
+        setDataLoaded(true); 
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  // Render nothing until the data is loaded
-  if (!dataLoaded) {
-    return null; // or a loading spinner, message, etc.
-  }
+    if (!dataLoaded) {
+      return null; // or a loading spinner, message, etc.
+    }
 
   return (
     <div>
       <div>
-        <p>Click the buttons below:</p>
+        <p>Arduino Control Buttons</p>
         <button onClick={() => handleButtonClick('off')}>Turn Off</button>
         <button onClick={() => handleButtonClick('on')}>Turn On</button>
       </div>

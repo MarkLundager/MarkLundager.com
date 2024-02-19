@@ -1,0 +1,14 @@
+.videoContainer {
+    width: 80%;
+    height: 59vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    background-color: red;
+}

@@ -1,5 +1,8 @@
 Flask
 pyserial
 bcrypt
-flask-cor
+flask_login
 celery
+Flask-SocketIO
+gunicorn
+picamera
