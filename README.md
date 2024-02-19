@@ -5,7 +5,7 @@ connected to an arduino which in turn is connected to 4 controllable LEDs. I use
 and features I wish to implement. Additionally, the website is not tailored to handle accesses from a smartphone.
 
 
-# To try Arduino Controller:
+# To try the Controller:
 
 In order to try the Arduino Controller, simply log in using the following (I intend to create requirements for usernames & passwords):
 Username: a
