@@ -4,6 +4,14 @@ marklundager.com is a website which I work on when I find the time. Currently, t
 connected to an arduino which in turn is connected to 4 controllable LEDs. I use NGINX as a reversed proxy to handle encryption (SSL), redirects and potential work load balances in the future. Listed below are features which I have added (marked Done)
 and features I wish to implement. Additionally, the website is not tailored to handle accesses from a smartphone.
 
+
+# To try Arduino Controller:
+
+In order to try the Arduino Controller, simply log in using the following (I intend to create requirements for usernames & passwords):
+Username: a
+Password: a
+
+
 # Ideas/Todo:
 
 - Add NGINX as reverse proxy to encrypt with SSL (DONE)
