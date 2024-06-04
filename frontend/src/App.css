@@ -2,13 +2,11 @@
   --green: #2b8520;
   --white: #ffffff;
   --gray: #333;
+  --lightgray: #525151;
   --black: #111;
+
+  --defaultLeftMargin: 1vh;
+  --titleFontSize: 3vh;
+  --accountListFontSize: 1.8vh;
+  --menuFontSize: 3vh;
 }
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-
-  

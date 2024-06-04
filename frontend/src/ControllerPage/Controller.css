@@ -1,36 +1,34 @@
-.controller-video-container{
-    background-color: white;
-    height: 59vh;
-    display:flex;
-    flex-direction: column;
+.controller-video-container {
+    background-color: black;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    color: white;
 }
 
-.controller-video{
-    width:80%;
+
+.controller-video {
+    width: 80%;
     height: 100%;
     background-color: black;
-    
 }
 
-.account-no-access{
+
+
+.account-no-access {
     position: relative;
-    background-color: red;
     left: 25vh;
 }
-.lamps-container-container{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    height: 20.5vh;
-}
+
+
+
 .lamps-container {
-    background-color: gray;
+    height: 5vh;
     width: 100%;
-    height:100%;
     display: flex;
     flex-direction: row;
-    position:relative;
+    position: relative;
     left: 50%;
     transform: translate(-50%);
 }
