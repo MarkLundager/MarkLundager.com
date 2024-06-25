@@ -43,7 +43,7 @@ const Header = () => {
       </div>
       <span id="firstName" className="firstName">
         <Link
-          to="/">Mark</Link>
+          to="/">Mark </Link>
       </span>
       <span id="lastName" className="lastName">
         <Link
@@ -51,11 +51,14 @@ const Header = () => {
       </span>
       <div className="menu">
         <ul>
-          <li>About me</li>
-          <li id="Projects">Projects</li>
+          <li id="AboutMe">
+            <Link to="/about_me_page">About Me</Link>
+          </li>
+          <li id="Projects">
+            <Link to="/projects_page">Projects</Link>
+          </li>
           <li id="Controller">
             <Link to="/controller_page">Controller</Link>
-
           </li>
         </ul>
       </div>

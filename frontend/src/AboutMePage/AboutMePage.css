@@ -1,0 +1,49 @@
+
+
+.AboutMePageContainer{
+    display: flex;
+    border-color: rgb(63, 66, 63);
+    border-style: solid;
+    height: 150vh;
+    border-left-width: 20vh;
+    border-right-width: 20vh;
+
+}
+
+.aboutMeContainer{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color: blue;
+    border-style: solid;
+
+    
+}
+
+.aboutMeTitle{
+    position:relative;
+    font-size: 3rem;
+}
+
+.profileFrame{
+    display: flex;
+    justify-content: center;
+    height: 40%;
+    width: 40%;
+    top: 5%;
+    right:25%;
+    position: relative;
+    border-radius: 90%;
+    background-image: url('profile.jpg');
+    background-size: contain;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+
+.aboutMeText{
+    font-size: 1rem;
+    border-style:solid;
+    border-color: var(--green);
+}
