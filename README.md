@@ -33,3 +33,4 @@ Password: a
 - Make webpage mobile friendly (PROGRESS)
 - Add Captcha requirement when creating an account. (PROGRESS)
 - Enforce Server side validation everywhere to prevent users from modifying Javascript code and bypassing requirements. (Progress)
+- Change from SQlite to MYSQL server
