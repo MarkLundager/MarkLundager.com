@@ -2,48 +2,89 @@
 
 .AboutMePageContainer{
     display: flex;
-    border-color: rgb(63, 66, 63);
-    border-style: solid;
+    background-color: rgb(63, 66, 63);;
     height: 150vh;
-    border-left-width: 20vh;
-    border-right-width: 20vh;
-
+    justify-content: center;
 }
 
+
 .aboutMeContainer{
-    width:100%;
+    border-radius: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #ffffff, #41942c); 
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
+    width:80%;
+    /* background-image: url("aboutmepage.webp");
+    background-size:cover;
+    background-position: center;  */
+
+    /*
     border-color: blue;
     border-style: solid;
+    */
+
 
     
 }
 
-.aboutMeTitle{
+.paragraphTitles{
     position:relative;
     font-size: 3rem;
+    /* border-color: green;
+    border-style: solid; 
+    */
+}
+
+.profileFrameAndTextContainer{
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: row;
+    margin-right: 50vh;
 }
 
 .profileFrame{
-    display: flex;
-    justify-content: center;
-    height: 40%;
-    width: 40%;
-    top: 5%;
-    right:25%;
+    /* border-color: red;
+    border-style: solid; */
+    height: 50vh;
+    width: 50vh;
     position: relative;
     border-radius: 90%;
     background-image: url('profile.jpg');
     background-size: contain;
     background-position: center; 
     background-repeat: no-repeat; 
+    margin: 0px;
+    padding: 0px;
 }
 
 
 .aboutMeText{
+    position:relative;
     font-size: 1rem;
-    border-style:solid;
-    border-color: var(--green);
+    top:10vh;
+    width: 40vh;
+    color: black;
+    /* border-style:solid;
+    border-color: var(--green); */
+}
+.markLundagerText{
+    position:relative;
+    font-size: 1rem;
+    top:5vh;
+    width: 80vh;
+    color: black;
+
+    /* border-style:solid;
+    border-color: var(--green); */
+}
+
+.vulnlist{
+    white-space: pre-line;
+    position:relative;
+    font-size: 1rem;
+    top:5vh;
+    width: 80vh;
+    color: black;
 }
