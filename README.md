@@ -16,7 +16,7 @@ Password: a
 
 # Ideas/Todo:
 
-- Add NGINX as reverse proxy to encrypt with SSL (DONE)
+- Add NGINX as reverse proxy to handle TSL (DONE)
 - Create SQL Database system for users & Lamp - authority association(DONE)
 - Restrict access based on account system (DONE)
 - Create SQL table mapping authority to accesses (DONE)
