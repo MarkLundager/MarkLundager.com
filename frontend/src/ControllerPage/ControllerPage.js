@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../LayoutTemplate/Layout";
 import Lamp from './Lamp.js'
 import './Controller.css'
@@ -14,7 +14,7 @@ const Controller = () => {
             const response = await fetch('/get_lamp_info', {
                 method: 'GET',
             });
-    
+
             if (response.ok) {
                 const { colours } = await response.json();
                 if (colours) {
@@ -41,33 +41,37 @@ const Controller = () => {
     }, []);
 
     const lamps = availableColors.map((color, index) => (
-        <Lamp key={index} color={color} />
-    ));
+        <Lamp key={index} color={color} />));
 
-    
-    return(
+
+    const testcolor = ["white", "green"]
+    const testlamps = testcolor.map((color, index) => (
+        <Lamp key={index} color={color} />));
+
+
+
+    return (
         <Layout>
-            <div className = "controller-video-container">
-            {
-            colorsLoaded ? (
-                availableColors.length > 0 ?(<VideoStreamerComponent></VideoStreamerComponent>)
-                :(<div>No video available with your authority level</div>)
-            )
-            :(<Spinner>Loading Video</Spinner>)
-            }
+            <div className="controller-video-container">
+                {
+                    colorsLoaded ? (
+                        availableColors.length > 0 ? (<VideoStreamerComponent></VideoStreamerComponent>)
+                            : (<div>No video available with your authority level</div>)
+                    )
+                        : (<Spinner>Loading Video</Spinner>)
+                }
             </div>
-            
-            <div className="lamps-container-container">
+
+
             {
-            colorsLoaded ? (
-                availableColors.length > 0 ?(<div className="lamps-container">{lamps}</div>)
-                :(<div>No buttons available with your authority level</div>)
-            )
-            :(<Spinner>Loading buttons</Spinner>)
+                colorsLoaded ? (
+                    availableColors.length >= 0 ? (<div className="lamps-container">{lamps}</div>)
+                        : (<div>No buttons available with your authority level</div>)
+                )
+                    : (<Spinner>Loading buttons</Spinner>)
             }
-            
-            </div>
-            
+
+
         </Layout>
     )
 }
