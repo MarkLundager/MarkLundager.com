@@ -29,6 +29,7 @@ Password: a
 - Add requirements on password and username (length, characters etc.)  (PROGRESS)
 - Create admin page to handle authorities.  (PROGRESS)
 - Fix resolution on stream  (PROGRESS)
+- Compress streaming data to allow better quality and higher FPS.
 - Create chat system (PROGRESS)
 - Make webpage mobile friendly (PROGRESS)
 - Add Captcha requirement when creating an account. (PROGRESS)
