@@ -1,6 +1,6 @@
 # MarkLundager.com
 
-Currently, the frontend is implemented using React.JS and the backend is implemented with Python (flask). It is hosted on my Raspberry Pi 4 which is
+Currently, the frontend is implemented using React.JS and the backend is implemented with Python (flask) which communicates with an SQL file. It is hosted on my Raspberry Pi 4 which is
 connected to an arduino. I use NGINX as a reversed proxy to handle encryption (TSL), redirects and potential work load balances in the future. Listed below are features which I have added (marked Done)
 and features I wish to implement.
 
@@ -34,4 +34,3 @@ Password: a
 - Make webpage mobile friendly (PROGRESS)
 - Add Captcha requirement when creating an account. (PROGRESS)
 - Enforce Server side validation everywhere to prevent users from modifying Javascript code and bypassing requirements. (Progress)
-- Change from SQlite to MYSQL server
