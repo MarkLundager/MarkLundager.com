@@ -5,15 +5,6 @@ connected to an arduino. I use NGINX as a reversed proxy to handle encryption (T
 and features I wish to implement.
 
 
-# To try the Controller:
-
-In order to try the Controller and see the stream, simply log in using the following (I intend to create requirements for usernames & passwords):
-
-Username: a
-
-Password: a
-
-
 # Ideas/Todo:
 
 - Add NGINX as reverse proxy to handle TSL (DONE)
