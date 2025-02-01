@@ -44,11 +44,9 @@ const Controller = () => {
         <Lamp key={index} color={color} />));
 
 
-    const testcolor = ["white", "green"]
-    const testlamps = testcolor.map((color, index) => (
-        <Lamp key={index} color={color} />));
-
-
+    // const testcolor = ["white", "green"]
+    // const testlamps = testcolor.map((color, index) => (
+    //     <Lamp key={index} color={color} />));
 
     return (
         <Layout>
@@ -61,8 +59,6 @@ const Controller = () => {
                         : (<Spinner>Loading Video</Spinner>)
                 }
             </div>
-
-
             {
                 colorsLoaded ? (
                     availableColors.length >= 0 ? (<div className="lamps-container">{lamps}</div>)
@@ -70,8 +66,6 @@ const Controller = () => {
                 )
                     : (<Spinner>Loading buttons</Spinner>)
             }
-
-
         </Layout>
     )
 }
