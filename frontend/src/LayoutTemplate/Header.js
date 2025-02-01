@@ -43,7 +43,7 @@ const Header = () => {
       </div>
       <span id="firstName" className="firstName">
         <Link
-          to="/">Mark</Link>
+          to="/">Mark </Link>
       </span>
       <span id="lastName" className="lastName">
         <Link

@@ -1,0 +1,16 @@
+.ProjectsContainer{
+
+}
+
+
+
+.ProjectsContainer ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    border-style: solid;
+    border-color: orange;
+}
+
+.ProjectsContainer li{
+}
