@@ -19,13 +19,7 @@ const VideoStreamComponent = () => {
       console.log('Disconnected from server');
     });
 
-    // window.addEventListener('beforeunload', () => {
-    //   socket.disconnect();
-    // });
-
     socket.on('video_frame', (data) => {
-      const img = document.getElementById('video_feed');
-
       if (data.frame instanceof ArrayBuffer) {
         console.log("image received");
         const base64String = btoa(
@@ -49,8 +43,8 @@ const VideoStreamComponent = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className = "videoContainer">
-      {videoLoaded ?(<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: '59vh' }} />):(<Spinner>Loading Video</Spinner>)}
+    <div className="videoContainer">
+      {videoLoaded ? (<img id="video_feed" alt="Video Stream" src={imgSrc} style={{ width: '100%', height: '59vh' }} />) : (<Spinner>Loading Video</Spinner>)}
     </div>
 
   );

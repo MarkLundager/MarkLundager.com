@@ -51,15 +51,6 @@ const Header = () => {
       </span>
       <div className="menu">
         <ul>
-          <li id="AboutMe">
-            <Link to="/about_me_page">About Me</Link>
-          </li>
-          <li id="Projects">
-            <Link to="/projects_page">Projects</Link>
-          </li>
-          <li id="Controller">
-            <Link to="/controller_page">Controller</Link>
-          </li>
         </ul>
       </div>
     </section>

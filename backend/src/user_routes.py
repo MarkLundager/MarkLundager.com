@@ -33,17 +33,19 @@ def unauthorized():
 
 
 @user_routes.route('/get_lamp_info')
-@login_required 
+#@login_required 
 def get_lamp_info():
-    colors = retrieve_lamps(current_user.authority)
+    #colors = retrieve_lamps(current_user.authority)
+    colors = "red,blue,yellow,green"
     response = jsonify({"colours": colors})
     response.status_code = 200
     return response
 
 @user_routes.route('/send_lamp_command_to_arduino/<color>')
-@login_required
+#@login_required
 def send_lamp_command_to_arduino_route(color):
-    colors = retrieve_lamps(current_user.authority).split(',')
+    #colors = retrieve_lamps(current_user.authority).split(',')
+    colors = "green,blue,yellow,red".split(',')
     if color in colors:
         send_lamp_command_to_arduino(color)
         response = jsonify({"message": "success"})
