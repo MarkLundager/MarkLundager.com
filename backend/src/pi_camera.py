@@ -4,8 +4,6 @@ import time
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from flask_cors import CORS
-import cv2
-import numpy as np
 
 
 socketapp = Flask(__name__)
@@ -16,7 +14,7 @@ generate_frames_flag = False  # Shared flag to track if frames are being generat
 def generate_frames():
     global generate_frames_flag
     with picamera.PiCamera() as camera:
-        camera.resolution = (300), (250)
+        camera.resolution = (640), (360)
         camera.framerate = 20
         time.sleep(2)
         while True:
@@ -26,31 +24,6 @@ def generate_frames():
                 yield stream.getvalue()
                 stream.seek(0)
                 stream.truncate()
-
-def generate_frames(): 
-    global generate_frames_flag
-    with picamera.PiCamera() as camera:
-        camera.resolution = (1920, 1080)
-        camera.framerate = 10
-        time.sleep(2)
-
-        stream = io.BytesIO()
-        while True:
-            if generate_frames_flag:
-                stream.seek(0)
-                camera.capture(stream, format='jpeg', use_video_port=True)  # Capture as JPEG
-
-                # Convert JPEG bytes to numpy array
-                data = np.frombuffer(stream.getvalue(), dtype=np.uint8)
-                frame = cv2.imdecode(data, cv2.IMREAD_COLOR)
-
-                # Resize frame (reduce resolution to lower bandwidth)
-                frame = cv2.resize(frame, (320, 240), interpolation=cv2.INTER_AREA)
-
-                # Encode as WebP with adjustable quality
-                _, encoded_frame = cv2.imencode('.webp', frame, [cv2.IMWRITE_WEBP_QUALITY, 50])
-
-                yield encoded_frame.tobytes()
 
 @socketapp.route('/home')
 def index():
