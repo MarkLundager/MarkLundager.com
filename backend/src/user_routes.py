@@ -36,7 +36,7 @@ def unauthorized():
 #@login_required 
 def get_lamp_info():
     #colors = retrieve_lamps(current_user.authority)
-    colors = "green,blue,yellow,red"
+    colors = "red,blue,yellow,green"
     response = jsonify({"colours": colors})
     response.status_code = 200
     return response

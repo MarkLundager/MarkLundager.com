@@ -51,7 +51,6 @@ const Header = () => {
       </span>
       <div className="menu">
         <ul>
-          <li>About me</li>
         </ul>
       </div>
     </section>
