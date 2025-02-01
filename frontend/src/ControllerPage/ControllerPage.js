@@ -44,9 +44,9 @@ const Controller = () => {
         <Lamp key={index} color={color} />));
 
 
-    const testcolor = ["white", "green"]
-    const testlamps = testcolor.map((color, index) => (
-        <Lamp key={index} color={color} />));
+    // const testcolor = ["white", "green"]
+    // const testlamps = testcolor.map((color, index) => (
+    //     <Lamp key={index} color={color} />));
 
 
 
@@ -64,8 +64,8 @@ const Controller = () => {
 
 
             {
-                !colorsLoaded ? (
-                    availableColors.length >= 0 ? (<div className="lamps-container">{testlamps}</div>)
+                colorsLoaded ? (
+                    availableColors.length >= 0 ? (<div className="lamps-container">{lamps}</div>)
                         : (<div>No buttons available with your authority level</div>)
                 )
                     : (<Spinner>Loading buttons</Spinner>)
