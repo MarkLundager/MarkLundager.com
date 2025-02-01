@@ -43,18 +43,13 @@ const Controller = () => {
     const lamps = availableColors.map((color, index) => (
         <Lamp key={index} color={color} />));
 
-
-    // const testcolor = ["white", "green"]
-    // const testlamps = testcolor.map((color, index) => (
-    //     <Lamp key={index} color={color} />));
-
     return (
         <Layout>
             <div className="controller-video-container">
                 {
                     colorsLoaded ? (
                         availableColors.length > 0 ? (<VideoStreamerComponent></VideoStreamerComponent>)
-                            : (<div>No video available with your authority level</div>)
+                            : (<div>Please Login using credentials "a" and "a" for username and password</div>)
                     )
                         : (<Spinner>Loading Video</Spinner>)
                 }
@@ -62,7 +57,7 @@ const Controller = () => {
             {
                 colorsLoaded ? (
                     availableColors.length >= 0 ? (<div className="lamps-container">{lamps}</div>)
-                        : (<div>No buttons available with your authority level</div>)
+                        : (<div>Please Login using credentials "a" and "a" for username and password</div>)
                 )
                     : (<Spinner>Loading buttons</Spinner>)
             }

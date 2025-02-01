@@ -52,11 +52,6 @@ const Header = () => {
       <div className="menu">
         <ul>
           <li>About me</li>
-          <li id="Projects">Projects</li>
-          <li id="Controller">
-            <Link to="/controller_page">Controller</Link>
-
-          </li>
         </ul>
       </div>
     </section>
