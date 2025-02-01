@@ -5,7 +5,6 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 from flask_cors import CORS
 
-
 socketapp = Flask(__name__)
 CORS(socketapp)
 socketio = SocketIO(socketapp, cors_allowed_origins="*")
@@ -14,7 +13,7 @@ generate_frames_flag = False  # Shared flag to track if frames are being generat
 def generate_frames():
     global generate_frames_flag
     with picamera.PiCamera() as camera:
-        camera.resolution = (640), (360)
+        camera.resolution = (300), (250)
         camera.framerate = 20
         time.sleep(2)
         while True:
@@ -24,6 +23,7 @@ def generate_frames():
                 yield stream.getvalue()
                 stream.seek(0)
                 stream.truncate()
+
 
 @socketapp.route('/home')
 def index():
