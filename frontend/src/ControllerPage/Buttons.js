@@ -7,13 +7,11 @@ const Buttons = ({ onButtonClick }) => {
 
   const handleButtonClick = (action) => {
     fetch(`/run_python_code/${action}`)
-    .then((response) => response.json())
-    .then(setDivColor(action === 'off' ? 'red' : 'green'))
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-    
-
+      .then((response) => response.json())
+      .then(setDivColor(action === 'off' ? 'red' : 'green'))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   useEffect(() => {
@@ -21,14 +19,14 @@ const Buttons = ({ onButtonClick }) => {
       .then(response => response.json())
       .then(data => {
         setDivColor(data.lightOn === false ? 'red' : 'green');
-        setDataLoaded(true); 
+        setDataLoaded(true);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-    if (!dataLoaded) {
-      return null; // or a loading spinner, message, etc.
-    }
+  if (!dataLoaded) {
+    return null; // or a loading spinner, message, etc.
+  }
 
   return (
     <div>

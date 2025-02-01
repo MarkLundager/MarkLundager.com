@@ -19,10 +19,6 @@ const VideoStreamComponent = () => {
       console.log('Disconnected from server');
     });
 
-    // window.addEventListener('beforeunload', () => {
-    //   socket.disconnect();
-    // });
-
     socket.on('video_frame', (data) => {
       if (data.frame instanceof ArrayBuffer) {
         console.log("image received");
