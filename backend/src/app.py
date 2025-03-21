@@ -5,7 +5,9 @@ from flask_cors import CORS
 
 #Global variables
 app = Flask(__name__, static_folder='../../frontend/build/static', template_folder='../../frontend/build')
-app.config['SECRET_KEY'] = 'c190e4718d190b1e7b956ebbe9339796dc037f4a1dc4d0d5c92b9c61f84d6fe3'
+with open("key.txt", "r", encoding="utf-8") as file:
+    key = file.read().strip()
+app.config['SECRET_KEY'] = key
 app.config['LOGIN_DISABLED'] = False
 login_manager.init_app(app)
 app.register_blueprint(user_routes)
