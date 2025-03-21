@@ -1,5 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+
+
+#Backend
+/backend/src/key.txt
+
+
+
 # dependencies
 /frontend/node_modules
 /.pnp
