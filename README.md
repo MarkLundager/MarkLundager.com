@@ -1,22 +1,13 @@
 # MarkLundager.com
 
-marklundager.com is a website which I work on when I find the time. Currently, the frontend is implemented using React and the backend is implemented with Python. It is hosted on my Raspberry Pi 4 which is
-connected to an arduino which in turn is connected to 4 controllable LEDs. I use NGINX as a reversed proxy to handle encryption (SSL), redirects and potential work load balances in the future. Listed below are features which I have added (marked Done)
-and features I wish to implement. Additionally, the website is not tailored to handle accesses from a smartphone.
-
-
-# To try the Controller:
-
-In order to try the Controller and see the stream, simply log in using the following (I intend to create requirements for usernames & passwords):
-
-Username: a
-
-Password: a
+Currently, the frontend is implemented using React.JS and the backend is implemented with Python (flask) which communicates with an SQL file. It is hosted on my Raspberry Pi 4 which is
+connected to an arduino. I use NGINX as a reversed proxy to handle encryption (TSL), redirects and potential work load balances in the future. Listed below are features which I have added (marked Done)
+and features I wish to implement.
 
 
 # Ideas/Todo:
 
-- Add NGINX as reverse proxy to encrypt with SSL (DONE)
+- Add NGINX as reverse proxy to handle TSL (DONE)
 - Create SQL Database system for users & Lamp - authority association(DONE)
 - Restrict access based on account system (DONE)
 - Create SQL table mapping authority to accesses (DONE)
@@ -29,5 +20,8 @@ Password: a
 - Add requirements on password and username (length, characters etc.)  (PROGRESS)
 - Create admin page to handle authorities.  (PROGRESS)
 - Fix resolution on stream  (PROGRESS)
-- Create chat system
-- Make webpage mobile friendly
+- Compress streaming data to allow better quality and higher FPS.
+- Create chat system (PROGRESS)
+- Make webpage mobile friendly (PROGRESS)
+- Add Captcha requirement when creating an account. (PROGRESS)
+- Enforce Server side validation everywhere to prevent users from modifying Javascript code and bypassing requirements. (Progress)
