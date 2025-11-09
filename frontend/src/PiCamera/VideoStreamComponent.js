@@ -8,7 +8,7 @@ const VideoStreamComponent = () => {
   const [imgSrc, setImgSrc] = useState('');
   useEffect(() => {
     const socket = io.connect(
-      "wss://" + "www.marklundager.com" + ":" + "" + "/video_feed"
+      "wss://www.marklundager.com:/video_feed"
     );
 
     socket.on('connect', () => {
@@ -36,11 +36,10 @@ const VideoStreamComponent = () => {
     console.log("emitting request_frame");
     socket.emit('request_frame');
 
-    // Cleanup when the component unmounts
     return () => {
       socket.disconnect();
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <div className="videoContainer">
