@@ -12,8 +12,6 @@ and features I wish to implement.
 - Restrict access based on account system (DONE)
 - Create SQL table mapping authority to accesses (DONE)
 - Add Password matching error on creating account when passwords do not match (DONE)
-- Create Project section
-- Create About Me section
 - check status code of every response and make sure it is in align with the conventions (PROGRESS)
 - Handle communication between client and server better in order to inform users better  (PROGRESS)
 - Structure backend better, especially regarding login_manager  (PROGRESS)
@@ -25,3 +23,4 @@ and features I wish to implement.
 - Make webpage mobile friendly (PROGRESS)
 - Add Captcha requirement when creating an account. (PROGRESS)
 - Enforce Server side validation everywhere to prevent users from modifying Javascript code and bypassing requirements. (Progress)
+
