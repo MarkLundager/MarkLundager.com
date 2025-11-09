@@ -39,7 +39,7 @@ const Controller = () => {
 
 
     }, []);
-
+    const availableColorsTest = ["yellow", "green", "blue", "red"];
     const lamps = availableColors.map((color, index) => (
         <Lamp key={index} color={color} />));
 

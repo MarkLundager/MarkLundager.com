@@ -1,6 +1,6 @@
 .videoContainer {
-    width: 80%;
-    height: 59vh;
+    width: 50vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
