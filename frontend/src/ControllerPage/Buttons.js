@@ -25,7 +25,7 @@ const Buttons = ({ onButtonClick }) => {
   }, []);
 
   if (!dataLoaded) {
-    return null; // or a loading spinner, message, etc.
+    return null;
   }
 
   return (

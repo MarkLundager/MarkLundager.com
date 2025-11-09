@@ -4,8 +4,6 @@ import ControllerPage from './ControllerPage/ControllerPage';
 import CreateAccountPage from './CreateAccountPage/CreateAccountPage';
 import LoginPage from './LoginPage/LoginPage';
 import LogoutPage from './LogoutPage/LogoutPage';
-import AboutMePage from './AboutMePage/AboutMePage';
-import ProjectPage from './ProjectPage/ProjectPage'
 
 
 
@@ -20,5 +18,5 @@ const App = () => {
       </Routes>
     </Router>
   );
-
+}
 export default App;

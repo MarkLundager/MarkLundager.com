@@ -29,12 +29,12 @@
 .button {
   cursor: pointer;
   position: relative;
-  padding: 8px 30px;
+  padding: 2vh 2vh;
   font-size: 1.5rem;
   color: var(--color);
   border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  text-shadow: 0 0 15px var(--color);
+  border-radius: 4vh;
+  text-shadow: 0 0 2vh var(--color);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
@@ -45,7 +45,7 @@
 .button:hover {
   color: #fff;
   border: 2px solid rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0px var(--color);
+  box-shadow: 0 0 0vh var(--color);
 }
 
 .button::before {
@@ -64,9 +64,9 @@
 .button:hover::before {
   transform: scale(1);
   transition-delay: 0.5s;
-  box-shadow: 0 0 10px var(--color),
-    0 0 30px var(--color),
-    0 0 60px var(--color);
+  box-shadow: 0 0 10vh var(--color),
+    0 0 6vh var(--color),
+    0 0 10vh var(--color);
 }
 
 .button span {
@@ -75,10 +75,10 @@
   pointer-events: none;
   border-radius: 2px;
   box-shadow: 0 0 10px var(--color),
-    0 0 20px var(--color),
-    0 0 30px var(--color),
-    0 0 50px var(--color),
-    0 0 100px var(--color);
+    0 0 5vh var(--color),
+    0 0 7vh var(--color),
+    0 0 10vh var(--color),
+    0 0 5vh var(--color);
   transition: 0.5s ease-in-out;
   transition-delay: 0.25s;
 }
@@ -90,8 +90,8 @@
 
 .button span:nth-child(1),
 .button span:nth-child(3) {
-  width: 40px;
-  height: 4px;
+  width: 5vh;
+  height: 1vh;
 }
 
 .button:hover span:nth-child(1),
@@ -101,8 +101,8 @@
 
 .button span:nth-child(2),
 .button span:nth-child(4) {
-  width: 4px;
-  height: 40px;
+  width: 1vh;
+  height: 5vh;
 }
 
 .button:hover span:nth-child(1),
@@ -111,8 +111,8 @@
 }
 
 .button span:nth-child(1) {
-  top: calc(50% - 2px);
-  left: -50px;
+  top: calc(50% - 0.5vh);
+  left: -6vh;
   transform-origin: left;
 }
 
@@ -121,8 +121,8 @@
 }
 
 .button span:nth-child(3) {
-  top: calc(50% - 2px);
-  right: -50px;
+  top: calc(50% - 0.5vh);
+  right: -6vh;
   transform-origin: right;
 }
 
@@ -131,8 +131,8 @@
 }
 
 .button span:nth-child(2) {
-  left: calc(50% - 2px);
-  top: -50px;
+  left: calc(50% - 0.5vh);
+  top: -5.5vh;
   transform-origin: top;
 }
 
@@ -141,8 +141,8 @@
 }
 
 .button span:nth-child(4) {
-  left: calc(50% - 2px);
-  bottom: -50px;
+  left: calc(50% - 0.5vh);
+  bottom: -5.5vh;
   transform-origin: bottom;
 }
 

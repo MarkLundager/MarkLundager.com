@@ -1,6 +1,6 @@
 .controller-video-container {
     background-color: black;
-    height: 60vh;
+    height: 75.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,11 +24,8 @@
 
 
 .lamps-container {
-    height: 30.9vh;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
 }
